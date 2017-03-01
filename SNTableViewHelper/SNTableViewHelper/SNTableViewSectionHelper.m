@@ -18,11 +18,33 @@
         return self;
     };
 }
-- (SNTableViewSectionHelper * (^)(NSArray *))data {
-    return ^SNTableViewSectionHelper *(NSArray * data) {
-        self.sectionData.data = data;
+- (SNTableViewSectionHelper * (^)(NSArray *))dataSection {
+    return ^SNTableViewSectionHelper *(NSArray * dataSection) {
+        self.sectionData.dataSection = dataSection;
         return self;
     };
+}
+- (SNTableViewSectionHelper *(^)(void))cellAutoHeight {
+    return ^SNTableViewSectionHelper *(void) {
+        self.sectionData.isAutoCellHeight = YES;
+        return self;
+    };
+}
+- (SNTableViewSectionHelper *(^)(CGFloat))cellHeight {
+    return ^SNTableViewSectionHelper *(CGFloat cellHeight) {
+        self.sectionData.cellHeight = cellHeight;
+        return self;
+    };
+}
+- (void)configCell:(ConfigCellBlock)configCellBlock {
+    if (configCellBlock) {
+        self.sectionData.configcell = configCellBlock;
+    }
+}
+- (void)selected:(SelectBlock)selectBlock {
+    if (selectBlock) {
+        self.sectionData.selected = selectBlock;
+    }
 }
 
 
@@ -32,6 +54,15 @@
     if (!_sectionData) {
         _sectionData = [SNTableViewDataSourceSection new];
     } return _sectionData;
+}
+
+- (NSString *)getIdentifier {
+    CFUUIDRef uuidRef = CFUUIDCreate(NULL);
+    CFStringRef uuidStrRef = CFUUIDCreateString(NULL, uuidRef);
+    CFRelease(uuidRef);
+    NSString * retStr = (__bridge NSString *) uuidStrRef;
+    CFRelease(uuidStrRef);
+    return retStr;
 }
 
 @end

@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-typedef void(^cellConfigBlock)(id cell, NSDictionary * data, NSUInteger index);
+//配置cell的块
+typedef void(^ConfigCellBlock)(id cell, id data, NSUInteger row);
 
 @class SNTableViewDataSourceSection;
 
 @interface SNTableViewDataSource : NSObject <UITableViewDataSource>
 
+//tableview的数据源
 @property (nonatomic, strong) NSMutableArray <SNTableViewDataSourceSection *> * sections;
 
 @end

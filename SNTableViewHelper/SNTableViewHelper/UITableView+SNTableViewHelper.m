@@ -52,13 +52,10 @@
     self.dataSource = dataSource;
     self.delegate = delegate;
     
-    dataSource.sections = viewHelper.sections;
+    delegate.sections = dataSource.sections = viewHelper.sections;
+    
     
     helper(viewHelper);
-}
-
-- (void)sn_helpDataSource:(void(^)(SNTableViewSectionHelper * helper))helper; {
-    
 }
 
 @end

@@ -10,14 +10,15 @@
 
 #import "ViewCell.h"
 
-@interface ViewController ()
+#import "TestViewController.h"
+
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView;
 
-@property (nonatomic, strong) SNTableViewDataSource * dataSource_sn;
-@property (nonatomic, strong) SNTableViewDelegate * delegate_sn;
-
 @end
+
+
 
 @implementation ViewController
 
@@ -25,33 +26,55 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.navigationController.navigationBar.alignmentRectInsets = UIEdgeInsetsMake(0, 0, 12, 0);
+    self.title = NSStringFromClass([self class]);
     
-    self.tableView = [UITableView tabeleViewWithFrame:CGRectMake(0, 64, PHONE_WIDTH, PHONE_HEIGHT*0.5)
-                                                style:UITableViewStyleGrouped
-                                            superView:self.view];
     
-    self.tableView.backgroundColor = [UIColor redColor];
+    self.tableView = [UITableView tabeleViewWithFrame:self.view.bounds style:UITableViewStyleGrouped superView:self.view];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+//    self.tableView.backgroundColor = [UIColor clearColor];
     
-    [self.tableView sn_helpTableView:^(SNTableViewHelper *helper) {
-        
-        [helper helpSection:^(SNTableViewSectionHelper *section) {
-            
-            section.cell([ViewCell class])
-            .data(@[@"",@""]);
-        }];
-        [helper helpSection:^(SNTableViewSectionHelper *section) {
-            
-            section.cell([ViewCell class])
-            .data(@[@"",@""]);
-            [section helpCell:^(SNTableViewCellHelper *cell) {
-                
-            }];
-        }];
-        
-    }];
+    UIScreenEdgePanGestureRecognizer * pan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(hanelPan:)];
+    
+    [[UIApplication sharedApplication].keyWindow addGestureRecognizer:pan];
+    
     
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ViewCell * cell = [ViewCell nibCellWithTabelView:tableView];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self.navigationController pushViewController:[TestViewController new] animated:YES];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)hanelPan:(UIScreenEdgePanGestureRecognizer *)sender {
+    SNLog(@"-----");
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    SNLog(@"000000000000000000000000000");
+}
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    SNLog(@"``````````````````````````");
+}
+
+- (void)dealloc {
+    SNLog(@"-----------dealloc-----------------");
+}
 
 @end

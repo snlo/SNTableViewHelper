@@ -10,11 +10,14 @@
 
 @interface SNTableViewDataSourceSection : NSObject
 
-/**
+/*
  section dataSource
- */
-@property (nonatomic, strong) NSArray * data;
+*/
+@property (nonatomic, strong) NSArray * dataSection;
 @property (nonatomic, strong) Class cell;
-@property (nonatomic, copy)
+@property (nonatomic, copy) ConfigCellBlock configcell;
+@property (nonatomic, assign) BOOL isAutoCellHeight;
+@property (nonatomic, assign) CGFloat cellHeight;
+@property (nonatomic, copy) SelectBlock selected;
 
 @end

@@ -27,6 +27,9 @@
 		B35A0E061E63D6B000B9BBA4 /* ViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0E041E63D6B000B9BBA4 /* ViewCell.m */; };
 		B35A0E071E63D6B000B9BBA4 /* ViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35A0E051E63D6B000B9BBA4 /* ViewCell.xib */; };
 		B394DF641E6567310088023B /* SNTableViewDataSourceSection.m in Sources */ = {isa = PBXBuildFile; fileRef = B394DF631E6567310088023B /* SNTableViewDataSourceSection.m */; };
+		B394DF681E669D1B0088023B /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B394DF661E669D1B0088023B /* TestViewController.m */; };
+		B394DF691E669D1B0088023B /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B394DF671E669D1B0088023B /* TestViewController.xib */; };
+		B394DF711E66BDFD0088023B /* EXTScope.m in Sources */ = {isa = PBXBuildFile; fileRef = B394DF701E66BDFD0088023B /* EXTScope.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,12 @@
 		B394DF611E6517350088023B /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B394DF621E6567310088023B /* SNTableViewDataSourceSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNTableViewDataSourceSection.h; sourceTree = "<group>"; };
 		B394DF631E6567310088023B /* SNTableViewDataSourceSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNTableViewDataSourceSection.m; sourceTree = "<group>"; };
+		B394DF651E669D1B0088023B /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		B394DF661E669D1B0088023B /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		B394DF671E669D1B0088023B /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
+		B394DF6F1E66BDFD0088023B /* EXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTScope.h; sourceTree = "<group>"; };
+		B394DF701E66BDFD0088023B /* EXTScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTScope.m; sourceTree = "<group>"; };
+		B394DF721E66BE350088023B /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +153,9 @@
 				B35A0E031E63D6B000B9BBA4 /* ViewCell.h */,
 				B35A0E041E63D6B000B9BBA4 /* ViewCell.m */,
 				B35A0E051E63D6B000B9BBA4 /* ViewCell.xib */,
+				B394DF651E669D1B0088023B /* TestViewController.h */,
+				B394DF661E669D1B0088023B /* TestViewController.m */,
+				B394DF671E669D1B0088023B /* TestViewController.xib */,
 				B35A0DE41E63C96300B9BBA4 /* SNTableViewHelper */,
 				B35A0DBA1E63C85800B9BBA4 /* Main.storyboard */,
 				B35A0DBD1E63C85800B9BBA4 /* Assets.xcassets */,
@@ -204,8 +216,19 @@
 				B35A0DFB1E63CEEC00B9BBA4 /* SNTableViewCellHelper.m */,
 				B35A0E001E63CF7800B9BBA4 /* SNTableViewHelper.h */,
 				B35A0E011E63CF7800B9BBA4 /* SNTableViewHelper.m */,
+				B394DF6B1E66B5820088023B /* Utilities */,
 			);
 			path = SNTableViewHelper;
+			sourceTree = "<group>";
+		};
+		B394DF6B1E66B5820088023B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B394DF6F1E66BDFD0088023B /* EXTScope.h */,
+				B394DF701E66BDFD0088023B /* EXTScope.m */,
+				B394DF721E66BE350088023B /* metamacros.h */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B35A0E071E63D6B000B9BBA4 /* ViewCell.xib in Resources */,
+				B394DF691E669D1B0088023B /* TestViewController.xib in Resources */,
 				B35A0DC11E63C85800B9BBA4 /* LaunchScreen.storyboard in Resources */,
 				B35A0DBE1E63C85800B9BBA4 /* Assets.xcassets in Resources */,
 				B35A0DBC1E63C85800B9BBA4 /* Main.storyboard in Resources */,
@@ -342,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B394DF711E66BDFD0088023B /* EXTScope.m in Sources */,
 				B35A0DE71E63C98A00B9BBA4 /* SNTableViewHelperManager.m in Sources */,
 				B35A0DF31E63CE9400B9BBA4 /* SNTableViewDataSource.m in Sources */,
 				B35A0E021E63CF7800B9BBA4 /* SNTableViewHelper.m in Sources */,
@@ -351,6 +376,7 @@
 				B35A0DF91E63CEDA00B9BBA4 /* SNTableViewSectionHelper.m in Sources */,
 				B35A0DB61E63C85800B9BBA4 /* AppDelegate.m in Sources */,
 				B35A0DF61E63CEA500B9BBA4 /* SNTableViewDelegate.m in Sources */,
+				B394DF681E669D1B0088023B /* TestViewController.m in Sources */,
 				B394DF641E6567310088023B /* SNTableViewDataSourceSection.m in Sources */,
 				B35A0DB31E63C85800B9BBA4 /* main.m in Sources */,
 				B35A0DED1E63CE3C00B9BBA4 /* UITableView+SNTableViewHelper.m in Sources */,

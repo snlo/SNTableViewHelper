@@ -13,11 +13,15 @@
 
 @interface SNTableViewHelper : NSObject
 
-- (void)helpSection:(void(^)(SNTableViewSectionHelper * section))sectionBlock;
-
 @property (nonatomic, weak) UITableView * tableView;
+
+//tableview的数据源
 @property (nonatomic, strong) NSMutableArray * sections;
 
+//初始化tableView
 + (instancetype)helperWithTableView:(UITableView *)tableView;
+
+//辅助一个section
+- (void)helpSection:(void(^)(SNTableViewSectionHelper * section))sectionBlock;
 
 @end

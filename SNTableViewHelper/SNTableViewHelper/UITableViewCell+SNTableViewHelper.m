@@ -18,7 +18,7 @@
     UITableViewCell * cell = [tabelView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:nil options:nil] firstObject];
-        //        cell = [[[self class] alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+                cell = [[[self class] alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     return cell;
 }

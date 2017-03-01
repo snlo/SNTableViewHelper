@@ -25,8 +25,12 @@
                               style:(UITableViewStyle)style
                           superView:(UIView *)superView;
 
-- (void)sn_helpTableView:(void(^)(SNTableViewHelper * helper))helper;
 
-- (void)sn_helpDataSource:(void(^)(SNTableViewSectionHelper * helper))helper;
+/**
+ 辅助配置tableview
+
+ @param helper 在这里配置，比如 helpSection
+ */
+- (void)sn_helpTableView:(void(^)(SNTableViewHelper * helper))helper;
 
 @end
