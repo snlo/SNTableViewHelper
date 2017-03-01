@@ -15,6 +15,18 @@
 		B35A0DC11E63C85800B9BBA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B35A0DBF1E63C85800B9BBA4 /* LaunchScreen.storyboard */; };
 		B35A0DCC1E63C85800B9BBA4 /* SNTableViewHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0DCB1E63C85800B9BBA4 /* SNTableViewHelperTests.m */; };
 		B35A0DD71E63C85800B9BBA4 /* SNTableViewHelperUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0DD61E63C85800B9BBA4 /* SNTableViewHelperUITests.m */; };
+		B35A0DE71E63C98A00B9BBA4 /* SNTableViewHelperManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0DE61E63C98A00B9BBA4 /* SNTableViewHelperManager.m */; };
+		B35A0DEA1E63CE2D00B9BBA4 /* UITableViewCell+SNTableViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0DE91E63CE2D00B9BBA4 /* UITableViewCell+SNTableViewHelper.m */; };
+		B35A0DED1E63CE3C00B9BBA4 /* UITableView+SNTableViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0DEC1E63CE3C00B9BBA4 /* UITableView+SNTableViewHelper.m */; };
+		B35A0DF01E63CE8300B9BBA4 /* SNTableViewProtocl.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0DEF1E63CE8300B9BBA4 /* SNTableViewProtocl.m */; };
+		B35A0DF31E63CE9400B9BBA4 /* SNTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0DF21E63CE9400B9BBA4 /* SNTableViewDataSource.m */; };
+		B35A0DF61E63CEA500B9BBA4 /* SNTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0DF51E63CEA500B9BBA4 /* SNTableViewDelegate.m */; };
+		B35A0DF91E63CEDA00B9BBA4 /* SNTableViewSectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0DF81E63CEDA00B9BBA4 /* SNTableViewSectionHelper.m */; };
+		B35A0DFC1E63CEEC00B9BBA4 /* SNTableViewCellHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0DFB1E63CEEC00B9BBA4 /* SNTableViewCellHelper.m */; };
+		B35A0E021E63CF7800B9BBA4 /* SNTableViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0E011E63CF7800B9BBA4 /* SNTableViewHelper.m */; };
+		B35A0E061E63D6B000B9BBA4 /* ViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A0E041E63D6B000B9BBA4 /* ViewCell.m */; };
+		B35A0E071E63D6B000B9BBA4 /* ViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35A0E051E63D6B000B9BBA4 /* ViewCell.xib */; };
+		B394DF641E6567310088023B /* SNTableViewDataSourceSection.m in Sources */ = {isa = PBXBuildFile; fileRef = B394DF631E6567310088023B /* SNTableViewDataSourceSection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +63,30 @@
 		B35A0DD21E63C85800B9BBA4 /* SNTableViewHelperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNTableViewHelperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35A0DD61E63C85800B9BBA4 /* SNTableViewHelperUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SNTableViewHelperUITests.m; sourceTree = "<group>"; };
 		B35A0DD81E63C85800B9BBA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B35A0DE51E63C98A00B9BBA4 /* SNTableViewHelperManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNTableViewHelperManager.h; sourceTree = "<group>"; };
+		B35A0DE61E63C98A00B9BBA4 /* SNTableViewHelperManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNTableViewHelperManager.m; sourceTree = "<group>"; };
+		B35A0DE81E63CE2D00B9BBA4 /* UITableViewCell+SNTableViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+SNTableViewHelper.h"; sourceTree = "<group>"; };
+		B35A0DE91E63CE2D00B9BBA4 /* UITableViewCell+SNTableViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+SNTableViewHelper.m"; sourceTree = "<group>"; };
+		B35A0DEB1E63CE3C00B9BBA4 /* UITableView+SNTableViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+SNTableViewHelper.h"; sourceTree = "<group>"; };
+		B35A0DEC1E63CE3C00B9BBA4 /* UITableView+SNTableViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+SNTableViewHelper.m"; sourceTree = "<group>"; };
+		B35A0DEE1E63CE8300B9BBA4 /* SNTableViewProtocl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNTableViewProtocl.h; sourceTree = "<group>"; };
+		B35A0DEF1E63CE8300B9BBA4 /* SNTableViewProtocl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNTableViewProtocl.m; sourceTree = "<group>"; };
+		B35A0DF11E63CE9400B9BBA4 /* SNTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNTableViewDataSource.h; sourceTree = "<group>"; };
+		B35A0DF21E63CE9400B9BBA4 /* SNTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNTableViewDataSource.m; sourceTree = "<group>"; };
+		B35A0DF41E63CEA500B9BBA4 /* SNTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNTableViewDelegate.h; sourceTree = "<group>"; };
+		B35A0DF51E63CEA500B9BBA4 /* SNTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNTableViewDelegate.m; sourceTree = "<group>"; };
+		B35A0DF71E63CEDA00B9BBA4 /* SNTableViewSectionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNTableViewSectionHelper.h; sourceTree = "<group>"; };
+		B35A0DF81E63CEDA00B9BBA4 /* SNTableViewSectionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNTableViewSectionHelper.m; sourceTree = "<group>"; };
+		B35A0DFA1E63CEEC00B9BBA4 /* SNTableViewCellHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNTableViewCellHelper.h; sourceTree = "<group>"; };
+		B35A0DFB1E63CEEC00B9BBA4 /* SNTableViewCellHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNTableViewCellHelper.m; sourceTree = "<group>"; };
+		B35A0E001E63CF7800B9BBA4 /* SNTableViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNTableViewHelper.h; sourceTree = "<group>"; };
+		B35A0E011E63CF7800B9BBA4 /* SNTableViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNTableViewHelper.m; sourceTree = "<group>"; };
+		B35A0E031E63D6B000B9BBA4 /* ViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewCell.h; sourceTree = "<group>"; };
+		B35A0E041E63D6B000B9BBA4 /* ViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewCell.m; sourceTree = "<group>"; };
+		B35A0E051E63D6B000B9BBA4 /* ViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewCell.xib; sourceTree = "<group>"; };
+		B394DF611E6517350088023B /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		B394DF621E6567310088023B /* SNTableViewDataSourceSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNTableViewDataSourceSection.h; sourceTree = "<group>"; };
+		B394DF631E6567310088023B /* SNTableViewDataSourceSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNTableViewDataSourceSection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +141,15 @@
 				B35A0DB51E63C85800B9BBA4 /* AppDelegate.m */,
 				B35A0DB71E63C85800B9BBA4 /* ViewController.h */,
 				B35A0DB81E63C85800B9BBA4 /* ViewController.m */,
+				B35A0E031E63D6B000B9BBA4 /* ViewCell.h */,
+				B35A0E041E63D6B000B9BBA4 /* ViewCell.m */,
+				B35A0E051E63D6B000B9BBA4 /* ViewCell.xib */,
+				B35A0DE41E63C96300B9BBA4 /* SNTableViewHelper */,
 				B35A0DBA1E63C85800B9BBA4 /* Main.storyboard */,
 				B35A0DBD1E63C85800B9BBA4 /* Assets.xcassets */,
 				B35A0DBF1E63C85800B9BBA4 /* LaunchScreen.storyboard */,
 				B35A0DC21E63C85800B9BBA4 /* Info.plist */,
+				B394DF611E6517350088023B /* PrefixHeader.pch */,
 				B35A0DB11E63C85800B9BBA4 /* Supporting Files */,
 			);
 			path = SNTableViewHelper;
@@ -138,6 +179,33 @@
 				B35A0DD81E63C85800B9BBA4 /* Info.plist */,
 			);
 			path = SNTableViewHelperUITests;
+			sourceTree = "<group>";
+		};
+		B35A0DE41E63C96300B9BBA4 /* SNTableViewHelper */ = {
+			isa = PBXGroup;
+			children = (
+				B35A0DE51E63C98A00B9BBA4 /* SNTableViewHelperManager.h */,
+				B35A0DE61E63C98A00B9BBA4 /* SNTableViewHelperManager.m */,
+				B35A0DE81E63CE2D00B9BBA4 /* UITableViewCell+SNTableViewHelper.h */,
+				B35A0DE91E63CE2D00B9BBA4 /* UITableViewCell+SNTableViewHelper.m */,
+				B35A0DEB1E63CE3C00B9BBA4 /* UITableView+SNTableViewHelper.h */,
+				B35A0DEC1E63CE3C00B9BBA4 /* UITableView+SNTableViewHelper.m */,
+				B35A0DEE1E63CE8300B9BBA4 /* SNTableViewProtocl.h */,
+				B35A0DEF1E63CE8300B9BBA4 /* SNTableViewProtocl.m */,
+				B35A0DF11E63CE9400B9BBA4 /* SNTableViewDataSource.h */,
+				B35A0DF21E63CE9400B9BBA4 /* SNTableViewDataSource.m */,
+				B35A0DF41E63CEA500B9BBA4 /* SNTableViewDelegate.h */,
+				B35A0DF51E63CEA500B9BBA4 /* SNTableViewDelegate.m */,
+				B394DF621E6567310088023B /* SNTableViewDataSourceSection.h */,
+				B394DF631E6567310088023B /* SNTableViewDataSourceSection.m */,
+				B35A0DF71E63CEDA00B9BBA4 /* SNTableViewSectionHelper.h */,
+				B35A0DF81E63CEDA00B9BBA4 /* SNTableViewSectionHelper.m */,
+				B35A0DFA1E63CEEC00B9BBA4 /* SNTableViewCellHelper.h */,
+				B35A0DFB1E63CEEC00B9BBA4 /* SNTableViewCellHelper.m */,
+				B35A0E001E63CF7800B9BBA4 /* SNTableViewHelper.h */,
+				B35A0E011E63CF7800B9BBA4 /* SNTableViewHelper.m */,
+			);
+			path = SNTableViewHelper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +314,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B35A0E071E63D6B000B9BBA4 /* ViewCell.xib in Resources */,
 				B35A0DC11E63C85800B9BBA4 /* LaunchScreen.storyboard in Resources */,
 				B35A0DBE1E63C85800B9BBA4 /* Assets.xcassets in Resources */,
 				B35A0DBC1E63C85800B9BBA4 /* Main.storyboard in Resources */,
@@ -273,9 +342,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B35A0DE71E63C98A00B9BBA4 /* SNTableViewHelperManager.m in Sources */,
+				B35A0DF31E63CE9400B9BBA4 /* SNTableViewDataSource.m in Sources */,
+				B35A0E021E63CF7800B9BBA4 /* SNTableViewHelper.m in Sources */,
+				B35A0DFC1E63CEEC00B9BBA4 /* SNTableViewCellHelper.m in Sources */,
 				B35A0DB91E63C85800B9BBA4 /* ViewController.m in Sources */,
+				B35A0DF01E63CE8300B9BBA4 /* SNTableViewProtocl.m in Sources */,
+				B35A0DF91E63CEDA00B9BBA4 /* SNTableViewSectionHelper.m in Sources */,
 				B35A0DB61E63C85800B9BBA4 /* AppDelegate.m in Sources */,
+				B35A0DF61E63CEA500B9BBA4 /* SNTableViewDelegate.m in Sources */,
+				B394DF641E6567310088023B /* SNTableViewDataSourceSection.m in Sources */,
 				B35A0DB31E63C85800B9BBA4 /* main.m in Sources */,
+				B35A0DED1E63CE3C00B9BBA4 /* UITableView+SNTableViewHelper.m in Sources */,
+				B35A0DEA1E63CE2D00B9BBA4 /* UITableViewCell+SNTableViewHelper.m in Sources */,
+				B35A0E061E63D6B000B9BBA4 /* ViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +504,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/SNTableViewHelper/PrefixHeader.pch";
 				INFOPLIST_FILE = SNTableViewHelper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -436,6 +517,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/SNTableViewHelper/PrefixHeader.pch";
 				INFOPLIST_FILE = SNTableViewHelper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -509,6 +591,7 @@
 				B35A0DDD1E63C85800B9BBA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B35A0DDE1E63C85800B9BBA4 /* Build configuration list for PBXNativeTarget "SNTableViewHelperTests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +600,7 @@
 				B35A0DE01E63C85800B9BBA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B35A0DE11E63C85800B9BBA4 /* Build configuration list for PBXNativeTarget "SNTableViewHelperUITests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +609,7 @@
 				B35A0DE31E63C85800B9BBA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
