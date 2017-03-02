@@ -15,4 +15,10 @@
  */
 + (instancetype)nibCellWithTabelView:(UITableView *)tabelView;
 
+
+/**
+ 加载非Nib创建的cell
+ */
++ (instancetype)cellWithTabelView:(UITableView *)tabelView;
+
 @end

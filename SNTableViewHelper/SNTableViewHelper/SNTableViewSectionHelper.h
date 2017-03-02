@@ -14,12 +14,15 @@
 
 @property (nonatomic, strong) SNTableViewDataSourceSection *sectionData;
 
+//当为null时，默认为‘UITableviewCell’
 - (SNTableViewSectionHelper * (^)(Class))cell;
+
+- (SNTableViewSectionHelper * (^)(Class))nibCell;
 
 //section的数据源
 - (SNTableViewSectionHelper * (^)(NSArray *))dataSection;
 
-//cell自适应高度
+//cell自适应高度。当cell上布局约束不健全时会抛出警告，并失效默认为44。
 - (SNTableViewSectionHelper * (^)(void))cellAutoHeight;
 
 //配置cell静态高度
@@ -31,6 +34,11 @@
 //处理事件的回调
 - (void)selected:(SelectBlock)selectBlock;
 
+- (SNTableViewSectionHelper * (^)(NSString * (^)(NSUInteger index)))headerTitle;
+- (SNTableViewSectionHelper * (^)(NSString * (^)(NSUInteger index)))footerTitle;
+
+- (SNTableViewSectionHelper * (^)(UIView * (^)(NSUInteger index)))headerView;
+- (SNTableViewSectionHelper * (^)(UIView * (^)(NSUInteger index)))footerView;
 
 
 @end

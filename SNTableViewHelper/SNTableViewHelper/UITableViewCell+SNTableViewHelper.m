@@ -16,10 +16,24 @@
 {
     NSString * identifier = NSStringFromClass([self class]);
     UITableViewCell * cell = [tabelView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:nil options:nil] firstObject];
-                cell = [[[self class] alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
+    
+    UINib * nib = [UINib nibWithNibName:identifier bundle:nil];
+    [tabelView registerNib:nib forCellReuseIdentifier:identifier];
+    cell = [tabelView dequeueReusableCellWithIdentifier:identifier];
+
+//    if (!cell) {
+//        cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:nil options:nil] firstObject];
+//    }
+    
+    return cell;
+}
+
++ (instancetype)cellWithTabelView:(UITableView *)tabelView {
+    
+    NSString * identifier = NSStringFromClass([self class]);
+    
+    UITableViewCell * cell = [tabelView dequeueReusableCellWithIdentifier:identifier];
+    
     return cell;
 }
 

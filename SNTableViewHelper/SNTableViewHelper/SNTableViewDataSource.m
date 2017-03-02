@@ -31,9 +31,14 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ViewCell * cell = [self.sections[indexPath.section].cell nibCellWithTabelView:tableView];
+    id cell;
+    if (self.sections[indexPath.section].isNibCell) {
+        cell = [self.sections[indexPath.section].cell nibCellWithTabelView:tableView];
+    } else {
+        cell = [self.sections[indexPath.section].cell cellWithTabelView:tableView];
+    }
     
-    ConfigCellBlock configCellBlock = self.sections[indexPath.section].configcell;
+    ConfigCellBlock configCellBlock = self.sections[indexPath.section].configCell;
     
     id data = self.sections[indexPath.section].dataSection[indexPath.row];
     

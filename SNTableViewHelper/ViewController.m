@@ -34,10 +34,6 @@
     self.tableView.dataSource = self;
 //    self.tableView.backgroundColor = [UIColor clearColor];
     
-    UIScreenEdgePanGestureRecognizer * pan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(hanelPan:)];
-    
-    [[UIApplication sharedApplication].keyWindow addGestureRecognizer:pan];
-    
     
 }
 
@@ -52,6 +48,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ViewCell * cell = [ViewCell nibCellWithTabelView:tableView];
     
+    cell.title_sn.text = @"asdafd";
+    
     return cell;
 }
 
@@ -59,19 +57,15 @@
     
     [self.navigationController pushViewController:[TestViewController new] animated:YES];
     
+    ViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.title_sn.text = @"ok";
+    
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)hanelPan:(UIScreenEdgePanGestureRecognizer *)sender {
-    SNLog(@"-----");
-}
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    SNLog(@"000000000000000000000000000");
-}
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    SNLog(@"``````````````````````````");
-}
 
 - (void)dealloc {
     SNLog(@"-----------dealloc-----------------");

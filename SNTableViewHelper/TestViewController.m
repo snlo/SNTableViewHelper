@@ -10,9 +10,13 @@
 
 #import "ViewCell.h"
 
+#import "TestViewCell.h"
+
 @interface TestViewController ()
 
-@property (nonatomic, strong) NSArray * data;
+@property (nonatomic, strong) NSMutableArray * data;
+@property (nonatomic, strong) NSMutableArray * feed;
+
 @property (nonatomic, strong) UITableView * tableView;
 
 
@@ -36,8 +40,21 @@
     view1.frame = CGRectMake(0, 0, PHONE_WIDTH, 100);
     view1.backgroundColor = [UIColor blueColor];
     
-    self.data = @[@"123",@"456",@"789"];
+    self.data = [@[
+                   @{@"text":@"Following",@"value":@"45"},
+                   @{@"text":@"Follower",@"value":@"10"},
+                   @{@"text":@"Star",@"value":@"234"},
+                   @{@"text":@"Setting",@"accessoryType":@(UITableViewCellAccessoryDisclosureIndicator)},
+                   @{@"text":@"Share",@"accessoryType":@(UITableViewCellAccessoryDisclosureIndicator)},
+                   ] mutableCopy];
+    self.feed = [NSMutableArray new];
+    NSError*error;
+    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"feed"ofType:@"json"];
+    NSData *json = [[NSData alloc]initWithContentsOfFile:filePath];
+    NSArray * jsonObject = [NSJSONSerialization JSONObjectWithData:json options:(NSJSONReadingOptions) kNilOptions error:&error];
+    [self.feed addObjectsFromArray:jsonObject];
     
+//    SNLog(@"%@",self.feed);
     
     self.tableView = [UITableView tabeleViewWithFrame:CGRectMake(0, 0, PHONE_WIDTH, PHONE_HEIGHT)
                                                 style:UITableViewStyleGrouped
@@ -51,12 +68,14 @@
         
         [helper helpSection:^(SNTableViewSectionHelper *section) {
             section
-            .cell([ViewCell class])
+            .nibCell([ViewCell class])
             .dataSection(self.data)
             .cellAutoHeight();
             [section configCell:^(ViewCell * cell, NSString * data, NSUInteger row) {
                 cell.title_sn.text = @"Do any additional setup after loading the view, typically from a nib.Do any additional setup after loading the view, typically from a nib.";
-                SNLog(@"in cell --- %@",data);
+                if (row == 1) {
+                    cell.title_sn.text = @"xxxx";
+                }
             }]; @weakify(self);
             [section selected:^(NSUInteger row, id data) { @strongify(self);
                 
@@ -67,7 +86,7 @@
         [helper helpSection:^(SNTableViewSectionHelper *section) {
             
             section
-            .cell([ViewCell class])
+            .nibCell([ViewCell class])
             .dataSection(@[@"11111",@"222222"])
             .cellHeight(44);
             [section configCell:^(ViewCell * cell, NSString * data, NSUInteger row) {
@@ -88,6 +107,24 @@
                         break;
                 }
             }];
+        }];
+        
+        [helper helpSection:^(SNTableViewSectionHelper *section) {
+            section
+            .cell([TestViewCell class])
+            .dataSection(self.feed)
+            .cellAutoHeight();
+            [section configCell:^(TestViewCell * cell, NSDictionary * data, NSUInteger row) {
+                [cell.avatarView setImage:[UIImage imageNamed:data[@"avatar"]]];
+                [cell.nameView setText:data[@"user"]];
+                [cell.dateView setText:data[@"date"]];
+                [cell.detailView setText:data[@"content"]];
+                [cell.imgView setImage:[UIImage imageNamed:data[@"image"]]];
+            }];
+            [section selected:^(NSUInteger row, id data) {
+                SNLog(@"非nib创建的cell");
+            }];
+            
         }];
         
     }];

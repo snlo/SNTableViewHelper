@@ -42,7 +42,8 @@
 
 - (void)sn_helpTableView:(void(^)(SNTableViewHelper * helper))helper {
     SNTableViewHelper * viewHelper = [SNTableViewHelper helperWithTableView:self];
-
+    helper(viewHelper);
+    
     SNTableViewDataSource * dataSource = [[SNTableViewDataSource alloc] init];
     SNTableViewDelegate * delegate = [[SNTableViewDelegate alloc] init];
     
@@ -53,9 +54,6 @@
     self.delegate = delegate;
     
     delegate.sections = dataSource.sections = viewHelper.sections;
-    
-    
-    helper(viewHelper);
 }
 
 @end

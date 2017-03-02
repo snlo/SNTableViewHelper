@@ -35,9 +35,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(7_0) {
-//    return 44;
-//}
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(7_0) {
+    return 44;
+}
+
 //- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section NS_AVAILABLE_IOS(7_0) {
 //    return 40;
 //}
@@ -49,28 +50,45 @@
     if (self.sections[indexPath.section].cellHeight) {
         return self.sections[indexPath.section].cellHeight;
     } else if (self.sections[indexPath.section].isAutoCellHeight) {
-        UITableViewCell * cell = [self cellForReuseIdentifier:@"ViewCell" withTableView:tableView];
-        [cell prepareForReuse];
-        CGFloat height = [self systemFittingHeightForConfiguratedCell:cell withTalbView:tableView];
+        NSUInteger section = (NSUInteger) indexPath.section;
+        NSUInteger index = (NSUInteger) indexPath.row;
+        NSString * identifier = self.sections[section].identifier;
+        
+        ConfigCellBlock configCellBlock = self.sections[section].configCell;
+        id data = self.sections[section].dataSection[index];
+        
+        NSNumber * numHeight = objc_getAssociatedObject(data, NSSelectorFromString(identifier));
+
+        if(!numHeight) {
+            UITableViewCell * cell = [self cellForReuseIdentifier:identifier withTableView:tableView];
+            [cell prepareForReuse];
+            
+            if(![configCellBlock isEqual:[NSNull null]]) {
+                configCellBlock(cell,data,index);
+            }
+            CGFloat height = [self systemFittingHeightForConfiguratedCell:cell withTalbView:tableView];
+            objc_setAssociatedObject(data,NSSelectorFromString(identifier),@(height),OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+            return height;
+        } else {
+            return [numHeight floatValue];
+        }
         
         
-        return height;
+        
     } else {
         return 0;
     }
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 10;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
 //- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
 //    return 10;
 //}
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UITableViewHeaderFooterView * view = [tableView headerViewForSection:section];
-    view.tintColor = [UIColor yellowColor];
-    SNLog(@"header`s view -- %@",view);
-    
+    UIView * view = [UIView new];
+    view.backgroundColor = [UIColor yellowColor];
     return view;
 }
 //- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -142,7 +160,7 @@
 #if DEBUG
         if (cell.contentView.constraints.count > 0) {
             if (!objc_getAssociatedObject(self, _cmd)) {
-                NSLog(@"Warning: Cannot get a proper cell height (now 0) from '- systemFittingSize:'(AutoLayout). You should check how constraints are built in cell, making it into 'self-sizing' cell.");
+                SNLog(@"Warning: Cannot get a proper cell height (now 0) from '- systemFittingSize:'(AutoLayout). You should check how constraints are built in cell, making it into 'self-sizing' cell.");
                 objc_setAssociatedObject(self, _cmd, @YES, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
             }
         }

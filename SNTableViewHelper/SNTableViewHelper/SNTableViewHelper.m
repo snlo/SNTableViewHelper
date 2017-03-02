@@ -25,7 +25,11 @@
 - (void)helpSection:(void(^)(SNTableViewSectionHelper * section))sectionBlock {
     SNTableViewSectionHelper * sectionHelper = [SNTableViewSectionHelper new];
     sectionBlock(sectionHelper);
-    SNLog(@"+++++++ %@",sectionHelper.sectionData.dataSection);
+    
+    if (sectionHelper.sectionData.cell) {
+        [self.tableView registerClass:sectionHelper.sectionData.cell forCellReuseIdentifier:sectionHelper.sectionData.identifier];
+    }
+    
     [self.sections addObject:sectionHelper.sectionData];
 }
 

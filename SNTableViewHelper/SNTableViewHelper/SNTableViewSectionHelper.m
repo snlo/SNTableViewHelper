@@ -15,9 +15,26 @@
 - (SNTableViewSectionHelper *(^)(__unsafe_unretained Class))cell {
     return ^SNTableViewSectionHelper *(Class cell) {
         self.sectionData.cell = cell;
+        if (!cell) {
+            self.sectionData.cell = [UITableViewCell class];
+        }
+        if (!self.sectionData.identifier) {
+            self.sectionData.identifier = NSStringFromClass([self.sectionData.cell class]);
+        }
         return self;
     };
 }
+- (SNTableViewSectionHelper *(^)(__unsafe_unretained Class))nibCell {
+    return ^SNTableViewSectionHelper *(Class nibCell) {
+        self.sectionData.cell = nibCell;
+        self.sectionData.isNibCell = YES;
+        if (!self.sectionData.identifier) {
+            self.sectionData.identifier = NSStringFromClass([nibCell class]);
+        }
+        return self;
+    };
+}
+
 - (SNTableViewSectionHelper * (^)(NSArray *))dataSection {
     return ^SNTableViewSectionHelper *(NSArray * dataSection) {
         self.sectionData.dataSection = dataSection;
@@ -38,7 +55,7 @@
 }
 - (void)configCell:(ConfigCellBlock)configCellBlock {
     if (configCellBlock) {
-        self.sectionData.configcell = configCellBlock;
+        self.sectionData.configCell = configCellBlock;
     }
 }
 - (void)selected:(SelectBlock)selectBlock {
@@ -47,6 +64,13 @@
     }
 }
 
+
+- (SNTableViewSectionHelper *(^)(NSString *(^)(NSUInteger)))headerTitle {
+    return ^SNTableViewSectionHelper *(NSString * (^title)(NSUInteger sectionIndex)) {
+        self.sectionData.headerTile = title(sectionIndex);
+        return self;
+    };
+}
 
 #pragma mark -- getter
 
