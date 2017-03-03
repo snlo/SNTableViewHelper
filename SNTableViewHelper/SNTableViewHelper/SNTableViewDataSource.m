@@ -43,7 +43,7 @@
     id data = self.sections[indexPath.section].dataSection[indexPath.row];
     
     if (configCellBlock) {
-        configCellBlock(cell, data, indexPath.row);
+        configCellBlock(cell, data, indexPath);
     }
     
     return cell;
@@ -54,11 +54,11 @@
     return self.sections.count;
 }
 
-//- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    return @"header title";
-//}
-//- (nullable NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-//    return @"footer title";
-//}
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return self.sections[(NSUInteger)section].headerTile;
+}
+- (nullable NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    return self.sections[(NSUInteger)section].footerTitle;
+}
 
 @end

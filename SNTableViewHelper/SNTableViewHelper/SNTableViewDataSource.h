@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 
 //配置cell的块
-typedef void(^ConfigCellBlock)(id cell, id data, NSUInteger row);
+typedef void(^ConfigCellBlock)(id cell, id data, NSIndexPath * indexPath);
 
 @class SNTableViewDataSourceSection;
 

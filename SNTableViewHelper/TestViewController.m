@@ -19,7 +19,10 @@
 
 @property (nonatomic, strong) UITableView * tableView;
 
-
+@property (nonatomic, strong) UIView * tableHeaderView;
+@property (nonatomic, strong) UIView * tableFooterView;
+@property (nonatomic, strong) UIView * sectionHeaderView;
+@property (nonatomic, strong) UIView * sectionFooterView;
 
 @end
 
@@ -32,20 +35,21 @@
     self.title = NSStringFromClass([self class]);
     self.view.backgroundColor = [UIColor clearColor];
     
-    UIView * view = [[UIView alloc]init];
-    view.frame = CGRectMake(0, 0, PHONE_WIDTH, 100);
-    view.backgroundColor = [UIColor greenColor];
     
-    UIView * view1 = [[UIView alloc]init];
-    view1.frame = CGRectMake(0, 0, PHONE_WIDTH, 100);
-    view1.backgroundColor = [UIColor blueColor];
-    
-    self.data = [@[
-                   @{@"text":@"Following",@"value":@"45"},
-                   @{@"text":@"Follower",@"value":@"10"},
-                   @{@"text":@"Star",@"value":@"234"},
-                   @{@"text":@"Setting",@"accessoryType":@(UITableViewCellAccessoryDisclosureIndicator)},
-                   @{@"text":@"Share",@"accessoryType":@(UITableViewCellAccessoryDisclosureIndicator)},
+    self.data = [@[@[
+                       @{@"text":@"Following",@"value":@"45"},
+                       @{@"text":@"Follower",@"value":@"10"},
+                       @{@"text":@"Star",@"value":@"234"},
+                       @{@"text":@"Setting",@"accessoryType":@(UITableViewCellAccessoryDisclosureIndicator)},
+                       @{@"text":@"Share",@"accessoryType":@(UITableViewCellAccessoryDisclosureIndicator)},
+                       ],
+                   @[
+                       @{@"text":@"Following",@"value":@"45"},
+                       @{@"text":@"Follower",@"value":@"10"},
+                       @{@"text":@"Star",@"value":@"234"},
+                       @{@"text":@"Setting",@"accessoryType":@(UITableViewCellAccessoryDisclosureIndicator)},
+                       @{@"text":@"Share",@"accessoryType":@(UITableViewCellAccessoryDisclosureIndicator)},
+                       ]
                    ] mutableCopy];
     self.feed = [NSMutableArray new];
     NSError*error;
@@ -63,19 +67,26 @@
     
     [self.tableView sn_helpTableView:^(SNTableViewHelper *helper) {
         
-        self.tableView.tableHeaderView = view;
-        self.tableView.tableFooterView = view1;
+        self.tableView.tableHeaderView = self.tableHeaderView;
+        self.tableView.tableFooterView = self.tableFooterView;
         
         [helper helpSection:^(SNTableViewSectionHelper *section) {
             section
             .nibCell([ViewCell class])
             .dataSection(self.data)
-            .cellAutoHeight();
-            [section configCell:^(ViewCell * cell, NSString * data, NSUInteger row) {
-                cell.title_sn.text = @"Do any additional setup after loading the view, typically from a nib.Do any additional setup after loading the view, typically from a nib.";
-                if (row == 1) {
-                    cell.title_sn.text = @"xxxx";
+            .cellAutoHeight()
+            .headerView(self.sectionHeaderView, ^(){
+                
+            });
+            [section configCell:^(ViewCell * cell, id data, NSIndexPath * indexPath) {
+//                cell.title_sn.text = data[@"text"];
+                NSString * string = [[NSString alloc] init];
+                if ([data isKindOfClass:[NSDictionary class]]) {
+                    string = data[@"text"];
+                } else {
+                    string = data;
                 }
+                cell.title_sn.text = string;
             }]; @weakify(self);
             [section selected:^(NSUInteger row, id data) { @strongify(self);
                 
@@ -88,8 +99,11 @@
             section
             .nibCell([ViewCell class])
             .dataSection(@[@"11111",@"222222"])
-            .cellHeight(44);
-            [section configCell:^(ViewCell * cell, NSString * data, NSUInteger row) {
+            .cellHeight(44)
+            .headerView(self.sectionHeaderView, ^() {
+                self.sectionHeaderView.backgroundColor = [UIColor redColor];
+            });
+            [section configCell:^(ViewCell * cell, NSString * data, NSIndexPath * indexPath) {
                cell.title_sn.text = data;
             }]; @weakify(self);
             [section selected:^(NSUInteger row, id data) { @strongify(self);
@@ -113,8 +127,11 @@
             section
             .cell([TestViewCell class])
             .dataSection(self.feed)
-            .cellAutoHeight();
-            [section configCell:^(TestViewCell * cell, NSDictionary * data, NSUInteger row) {
+            .cellAutoHeight()
+            .headerView(self.sectionHeaderView, ^() {
+                self.sectionHeaderView.backgroundColor = [UIColor redColor];
+            });
+            [section configCell:^(TestViewCell * cell, NSDictionary * data, NSIndexPath * indexPath) {
                 [cell.avatarView setImage:[UIImage imageNamed:data[@"avatar"]]];
                 [cell.nameView setText:data[@"user"]];
                 [cell.dateView setText:data[@"date"]];
@@ -136,6 +153,34 @@
 
 - (void)dealloc {
     SNLog(@"-----------dealloc-----------------");
+}
+
+- (UIView *)tableHeaderView {
+    if (!_tableHeaderView) {
+        _tableHeaderView = [[UIView alloc]init];
+        _tableHeaderView.frame = CGRectMake(0, 0, PHONE_WIDTH, 100);
+        _tableHeaderView.backgroundColor = [UIColor greenColor];
+    } return _tableHeaderView;
+}
+- (UIView *)tableFooterView {
+    if (!_tableFooterView) {
+        _tableFooterView = [[UIView alloc]init];
+        _tableFooterView.frame = CGRectMake(0, 0, PHONE_WIDTH, 100);
+        _tableFooterView.backgroundColor = [UIColor greenColor];
+    } return _tableFooterView;
+}
+
+- (UIView *)sectionHeaderView {
+    _sectionHeaderView = [[UIView alloc] init];
+    _sectionHeaderView.frame = CGRectMake(0, 0, PHONE_WIDTH, 10);
+    _sectionHeaderView.backgroundColor = [UIColor blueColor];
+    return _sectionHeaderView;
+}
+- (UIView *)sectionFooterView {
+    _sectionFooterView = [[UIView alloc] init];
+    _sectionFooterView.frame = CGRectMake(0, 0, PHONE_WIDTH, 10);
+    _sectionFooterView.backgroundColor = [UIColor blueColor];
+    return _sectionFooterView;
 }
 
 @end

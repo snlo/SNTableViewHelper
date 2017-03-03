@@ -64,7 +64,7 @@
             [cell prepareForReuse];
             
             if(![configCellBlock isEqual:[NSNull null]]) {
-                configCellBlock(cell,data,index);
+                configCellBlock(cell,data,indexPath);
             }
             CGFloat height = [self systemFittingHeightForConfiguratedCell:cell withTalbView:tableView];
             objc_setAssociatedObject(data,NSSelectorFromString(identifier),@(height),OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -72,31 +72,36 @@
         } else {
             return [numHeight floatValue];
         }
-        
-        
-        
     } else {
         return 0;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
+    if (self.sections[(NSUInteger)section].headerView) {
+        return self.sections[(NSUInteger)section].headerView.frame.size.height;
+    } else if (self.sections[(NSUInteger)section].headerTile) {
+        return 40;
+    } else {
+        return 0.001;
+    }
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    return 10;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (self.sections[(NSUInteger)section].footerView) {
+        return self.sections[(NSUInteger)section].footerView.frame.size.height;
+    } else if (self.sections[(NSUInteger)section].footerTitle) {
+        return 40;
+    } else {
+        return 0.001;
+    }
+}
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView * view = [UIView new];
-    view.backgroundColor = [UIColor yellowColor];
-    return view;
+    return self.sections[(NSUInteger)section].headerView;
 }
-//- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-//    UIView * view = [[UIView alloc]init];
-//    view.backgroundColor = [UIColor greenColor];
-//    
-//    return view;
-//}
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return self.sections[(NSUInteger)section].footerView;
+}
+
 
 #pragma mark -- pravite method
 

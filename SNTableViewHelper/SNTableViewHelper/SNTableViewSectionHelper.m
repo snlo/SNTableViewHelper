@@ -37,6 +37,7 @@
 
 - (SNTableViewSectionHelper * (^)(NSArray *))dataSection {
     return ^SNTableViewSectionHelper *(NSArray * dataSection) {
+        
         self.sectionData.dataSection = dataSection;
         return self;
     };
@@ -64,10 +65,27 @@
     }
 }
 
-
-- (SNTableViewSectionHelper *(^)(NSString *(^)(NSUInteger)))headerTitle {
-    return ^SNTableViewSectionHelper *(NSString * (^title)(NSUInteger sectionIndex)) {
-        self.sectionData.headerTile = title(sectionIndex);
+- (SNTableViewSectionHelper *(^)(NSString *))headerTitle {
+    return ^SNTableViewSectionHelper *(NSString *headerTitle) {
+        self.sectionData.headerTile = headerTitle;
+        return self;
+    };
+}
+- (SNTableViewSectionHelper *(^)(NSString *))footerTitle {
+    return ^SNTableViewSectionHelper *(NSString *footerTitle) {
+        self.sectionData.footerTitle = footerTitle;
+        return self;
+    };
+}
+- (SNTableViewSectionHelper *(^)(UIView *, void (^)()))headerView {
+    return ^SNTableViewSectionHelper *(UIView *headerView, void(^view)()) {
+        self.sectionData.headerView = headerView; view();
+        return self;
+    };
+}
+- (SNTableViewSectionHelper *(^)(UIView *(^)()))footerView {
+    return ^SNTableViewSectionHelper *(UIView * (^view)()) {
+        self.sectionData.footerView = view();
         return self;
     };
 }

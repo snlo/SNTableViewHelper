@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+__attribute__((objc_subclassing_restricted)) //标记不能被继承
+
 @interface SNTableViewDataSourceSection : NSObject
 
 /*

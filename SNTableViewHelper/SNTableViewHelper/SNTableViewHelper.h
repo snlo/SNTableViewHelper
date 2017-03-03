@@ -24,4 +24,7 @@
 //辅助一个section
 - (void)helpSection:(void(^)(SNTableViewSectionHelper * section))sectionBlock;
 
+//辅助多个section
+- (void)helpSomeSection:(void(^)(SNTableViewSectionHelper * section))sectionBlock;
+
 @end

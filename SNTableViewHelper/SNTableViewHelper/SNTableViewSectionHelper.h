@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef UIView *(^SNHeaderFooterView)();
+
 @class SNTableViewDataSourceSection;
 
 @interface SNTableViewSectionHelper : NSObject
@@ -34,11 +36,12 @@
 //处理事件的回调
 - (void)selected:(SelectBlock)selectBlock;
 
-- (SNTableViewSectionHelper * (^)(NSString * (^)(NSUInteger index)))headerTitle;
-- (SNTableViewSectionHelper * (^)(NSString * (^)(NSUInteger index)))footerTitle;
+- (SNTableViewSectionHelper * (^)(NSString *))headerTitle;
+- (SNTableViewSectionHelper * (^)(NSString *))footerTitle;
 
-- (SNTableViewSectionHelper * (^)(UIView * (^)(NSUInteger index)))headerView;
-- (SNTableViewSectionHelper * (^)(UIView * (^)(NSUInteger index)))footerView;
+- (SNTableViewSectionHelper * (^)(UIView *,void(^)()))headerView;
+- (SNTableViewSectionHelper * (^)(UIView * (^)()))footerView;
+
 
 
 @end
