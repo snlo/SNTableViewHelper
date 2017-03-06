@@ -21,4 +21,6 @@
  */
 + (instancetype)cellWithTabelView:(UITableView *)tabelView;
 
+@property (nonatomic, assign) BOOL is_snt_separator;
+
 @end

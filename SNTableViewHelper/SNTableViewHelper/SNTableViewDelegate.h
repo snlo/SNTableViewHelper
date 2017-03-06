@@ -10,7 +10,10 @@
 #import <Foundation/Foundation.h>
 
 //Select事件块
-typedef void(^SelectBlock)(NSUInteger row, id data);
+typedef void(^SelectBlock)(NSUInteger row, id data, UITableView * tableView);
+
+typedef void(^HeaderviewBlock)(UIView * headerView, NSUInteger section);
+typedef void(^FooterViewBlock)(UIView * footerView, NSUInteger section);
 
 @interface SNTableViewDelegate : NSObject <UITableViewDelegate>
 

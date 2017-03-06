@@ -43,7 +43,7 @@
     id data = self.sections[indexPath.section].dataSection[indexPath.row];
     
     if (configCellBlock) {
-        configCellBlock(cell, data, indexPath);
+        configCellBlock(cell, data, indexPath, tableView);
     }
     
     return cell;

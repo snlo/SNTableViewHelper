@@ -29,7 +29,7 @@
     
     if (selectBlock) {
         id data = self.sections[indexPath.section].dataSection[indexPath.row];
-        selectBlock(indexPath.row, data);
+        selectBlock(indexPath.row, data, tableView);
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -64,7 +64,7 @@
             [cell prepareForReuse];
             
             if(![configCellBlock isEqual:[NSNull null]]) {
-                configCellBlock(cell,data,indexPath);
+                configCellBlock(cell,data,indexPath, tableView);
             }
             CGFloat height = [self systemFittingHeightForConfiguratedCell:cell withTalbView:tableView];
             objc_setAssociatedObject(data,NSSelectorFromString(identifier),@(height),OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -81,6 +81,8 @@
         return self.sections[(NSUInteger)section].headerView.frame.size.height;
     } else if (self.sections[(NSUInteger)section].headerTile) {
         return 40;
+    } else if (self.sections[(NSUInteger)section].headerHeight) {
+        return self.sections[(NSUInteger)section].headerHeight;
     } else {
         return 0.001;
     }
@@ -90,18 +92,40 @@
         return self.sections[(NSUInteger)section].footerView.frame.size.height;
     } else if (self.sections[(NSUInteger)section].footerTitle) {
         return 40;
+    } else  if (self.sections[(NSUInteger)section].footerHeight) {
+        return self.sections[(NSUInteger)section].footerHeight;
     } else {
         return 0.001;
     }
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    HeaderviewBlock headerViewBlock = self.sections[section].headerViewBlock;
+    if (headerViewBlock) {
+        headerViewBlock(self.sections[(NSUInteger)section].headerView, (NSUInteger)section);
+    }
     return self.sections[(NSUInteger)section].headerView;
 }
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    FooterViewBlock footerViewBlock = self.sections[section].footerViewBlock;
+    if (footerViewBlock) {
+        footerViewBlock(self.sections[(NSUInteger)section].footerView, (NSUInteger)section);
+    }
     return self.sections[(NSUInteger)section].footerView;
 }
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath NS_AVAILABLE_IOS(6_0) {
+    
+}
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        [cell.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.frame.size.height < 1 ) {
+                SNLog(@"cell - - - color - %@ ",obj.tintColor);
+            }
+        }];
+    }
+}
 
 #pragma mark -- pravite method
 

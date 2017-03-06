@@ -39,9 +39,22 @@ typedef UIView *(^SNHeaderFooterView)();
 - (SNTableViewSectionHelper * (^)(NSString *))headerTitle;
 - (SNTableViewSectionHelper * (^)(NSString *))footerTitle;
 
-- (SNTableViewSectionHelper * (^)(UIView *,void(^)()))headerView;
+- (SNTableViewSectionHelper * (^)(UIView * (^)()))headerView;
+- (void)headerView:(UIView *)headerView setting:(HeaderviewBlock)headerViewBlock;
+
 - (SNTableViewSectionHelper * (^)(UIView * (^)()))footerView;
+- (void)footerView:(UIView *)footerView setting:(FooterViewBlock)footerViewBlock;
 
+- (SNTableViewSectionHelper * (^)(CGFloat headerHeight))headerHeight;
+- (SNTableViewSectionHelper * (^)(CGFloat footerHeight))footerHeight;
 
+@end
+
+@interface UIView (SNTableViewHelper)
+
+/**
+ 复制一份view
+ */
++ (UIView *)snt_duplicate:(UIView *)view;
 
 @end

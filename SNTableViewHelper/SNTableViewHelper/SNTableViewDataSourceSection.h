@@ -31,8 +31,13 @@ __attribute__((objc_subclassing_restricted)) //标记不能被继承
 @property (nonatomic, strong) NSString * footerTitle;
 @property (nonatomic, strong) UIView * headerView;
 @property (nonatomic, strong) UIView * footerView;
+@property (nonatomic, assign) CGFloat headerHeight;
+@property (nonatomic, assign) CGFloat footerHeight;
 
 @property (nonatomic, copy) SelectBlock selected;
+
+@property (nonatomic, copy) HeaderviewBlock headerViewBlock;
+@property (nonatomic, copy) FooterViewBlock footerViewBlock;
 
 
 

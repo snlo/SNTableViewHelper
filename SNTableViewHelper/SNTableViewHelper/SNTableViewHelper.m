@@ -26,12 +26,17 @@
     SNTableViewSectionHelper * sectionHelper = [[SNTableViewSectionHelper alloc] init];
     sectionBlock(sectionHelper);
     
-//    if (sectionHelper.sectionData.cell) {
-//        [self.tableView registerClass:sectionHelper.sectionData.cell forCellReuseIdentifier:sectionHelper.sectionData.identifier];
-//    }
-//
-//    [self.sections addObject:sectionHelper.sectionData];
+    if (sectionHelper.sectionData.cell) {
+        [self.tableView registerClass:sectionHelper.sectionData.cell forCellReuseIdentifier:sectionHelper.sectionData.identifier];
+    }
+    [self.sections addObject:sectionHelper.sectionData];
+}
+
+- (void)helpSpecialSection:(void(^)(SNTableViewSectionHelper * section))sectionBlock {
+    SNTableViewSectionHelper * sectionHelper = [[SNTableViewSectionHelper alloc] init];
+    sectionBlock(sectionHelper);
     
+    __block NSMutableArray * dicArray = [[NSMutableArray alloc] init];
     __block NSMutableArray * tempArray = [[NSMutableArray alloc]init];
     
     [sectionHelper.sectionData.dataSection enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -46,17 +51,20 @@
             
             helper.sectionData.dataSection = obj;
             [self.sections addObject:helper.sectionData];
+            
         } else if ([obj isKindOfClass:[NSDictionary class]]) {
-//            sectionBlock(helper);
-            helper.sectionData.dataSection = @[obj];
-            [self.sections addObject:helper.sectionData];
+
+            [dicArray addObject:obj];
         }
         else {
             SNLog(@"Warning:data source error -> %@, should be array array or dicionary",obj);
             [tempArray addObject:obj];
-            
         }
     }];
+    if (dicArray.count > 0) {
+        sectionHelper.sectionData.dataSection = dicArray;
+        [self.sections addObject:sectionHelper.sectionData];
+    }
     if (tempArray.count > 0) {
         sectionHelper.sectionData.dataSection = tempArray;
         [self.sections addObject:sectionHelper.sectionData];
@@ -83,6 +91,7 @@
         }
     }];
 }
+
 
 #pragma mark -- getter
 

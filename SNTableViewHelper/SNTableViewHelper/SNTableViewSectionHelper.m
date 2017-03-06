@@ -77,15 +77,41 @@
         return self;
     };
 }
-- (SNTableViewSectionHelper *(^)(UIView *, void (^)()))headerView {
-    return ^SNTableViewSectionHelper *(UIView *headerView, void(^view)()) {
-        self.sectionData.headerView = headerView; view();
+- (SNTableViewSectionHelper *(^)(UIView *(^)()))headerView {
+    return ^SNTableViewSectionHelper *(UIView *(^view)()) {
+        self.sectionData.headerView = view();
         return self;
     };
 }
+- (void)headerView:(UIView *)headerView setting:(HeaderviewBlock)headerViewBlock {
+    self.sectionData.headerView = [UIView snt_duplicate:headerView];
+    if (headerViewBlock) {
+        self.sectionData.headerViewBlock = headerViewBlock;
+    }
+}
+
 - (SNTableViewSectionHelper *(^)(UIView *(^)()))footerView {
     return ^SNTableViewSectionHelper *(UIView * (^view)()) {
         self.sectionData.footerView = view();
+        return self;
+    };
+}
+- (void)footerView:(UIView *)footerView setting:(FooterViewBlock)footerViewBlock {
+    self.sectionData.footerView = [UIView snt_duplicate:footerView];
+    if (footerViewBlock) {
+        self.sectionData.footerViewBlock = footerViewBlock;
+    }
+}
+
+- (SNTableViewSectionHelper * (^)(CGFloat headerHeight))headerHeight {
+    return ^SNTableViewSectionHelper *(CGFloat headerHeight) {
+        self.sectionData.headerHeight = headerHeight;
+        return self;
+    };
+}
+- (SNTableViewSectionHelper * (^)(CGFloat footerHeight))footerHeight {
+    return ^SNTableViewSectionHelper *(CGFloat footerHeight) {
+        self.sectionData.footerHeight = footerHeight;
         return self;
     };
 }
@@ -105,6 +131,17 @@
     NSString * retStr = (__bridge NSString *) uuidStrRef;
     CFRelease(uuidStrRef);
     return retStr;
+}
+
+@end
+
+#pragma other category
+
+@implementation UIView (SNTableViewHelper)
+
++ (UIView *)snt_duplicate:(UIView *)view {
+    NSData * tempArchive = [NSKeyedArchiver archivedDataWithRootObject:view];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:tempArchive];
 }
 
 @end

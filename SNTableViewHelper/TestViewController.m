@@ -35,6 +35,10 @@
     self.title = NSStringFromClass([self class]);
     self.view.backgroundColor = [UIColor clearColor];
     
+    UIView * testView = [[UIView alloc] init];
+    testView.backgroundColor = [UIColor redColor];
+    testView.frame = CGRectMake(15, 0, PHONE_WIDTH, 100);
+    
     
     self.data = [@[@[
                        @{@"text":@"Following",@"value":@"45"},
@@ -42,7 +46,11 @@
                        @{@"text":@"Star",@"value":@"234"},
                        @{@"text":@"Setting",@"accessoryType":@(UITableViewCellAccessoryDisclosureIndicator)},
                        @{@"text":@"Share",@"accessoryType":@(UITableViewCellAccessoryDisclosureIndicator)},
+                       @"xxxxxxxxxx",
                        ],
+                   @{@"text":@"dddd"},
+                   @{@"text":@"nnnn"},
+                   
                    @[
                        @{@"text":@"Following",@"value":@"45"},
                        @{@"text":@"Follower",@"value":@"10"},
@@ -70,15 +78,22 @@
         self.tableView.tableHeaderView = self.tableHeaderView;
         self.tableView.tableFooterView = self.tableFooterView;
         
-        [helper helpSection:^(SNTableViewSectionHelper *section) {
+        
+//        self.tableView.separatorStyle = NO;
+        
+        [helper helpSpecialSection:^(SNTableViewSectionHelper *section) {
             section
             .nibCell([ViewCell class])
             .dataSection(self.data)
-            .cellAutoHeight()
-            .headerView(self.sectionHeaderView, ^(){
+            .cellAutoHeight();
+            [section headerView:self.sectionHeaderView setting:^(UIView *headerView, NSUInteger section) {
                 
-            });
-            [section configCell:^(ViewCell * cell, id data, NSIndexPath * indexPath) {
+                if (section == 1) {
+                    headerView.backgroundColor = [UIColor redColor];
+                }
+                SNLog(@"- - - - - - - - -%lu",(unsigned long)section);
+            }];
+            [section configCell:^(ViewCell * cell, id data, NSIndexPath * indexPath, UITableView * tableView) {
 //                cell.title_sn.text = data[@"text"];
                 NSString * string = [[NSString alloc] init];
                 if ([data isKindOfClass:[NSDictionary class]]) {
@@ -87,8 +102,9 @@
                     string = data;
                 }
                 cell.title_sn.text = string;
+                cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
             }]; @weakify(self);
-            [section selected:^(NSUInteger row, id data) { @strongify(self);
+            [section selected:^(NSUInteger row, id data, UITableView * tableView) { @strongify(self);
                 
                 [self test];
             }];
@@ -99,14 +115,15 @@
             section
             .nibCell([ViewCell class])
             .dataSection(@[@"11111",@"222222"])
-            .cellHeight(44)
-            .headerView(self.sectionHeaderView, ^() {
-                self.sectionHeaderView.backgroundColor = [UIColor redColor];
-            });
-            [section configCell:^(ViewCell * cell, NSString * data, NSIndexPath * indexPath) {
+            .cellHeight(44);
+            [section headerView:self.sectionHeaderView setting:^(UIView *headerView, NSUInteger section) {
+               SNLog(@"--- - - -- -  -%lu",(unsigned long)section);
+            }];
+            [section configCell:^(ViewCell * cell, NSString * data, NSIndexPath * indexPath, UITableView * tableView) {
                cell.title_sn.text = data;
+                cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 10);
             }]; @weakify(self);
-            [section selected:^(NSUInteger row, id data) { @strongify(self);
+            [section selected:^(NSUInteger row, id data, UITableView * tableView) { @strongify(self);
                 SNLog(@"selected --- %@",data);
                 switch (row) {
                     case 0: {
@@ -128,23 +145,26 @@
             .cell([TestViewCell class])
             .dataSection(self.feed)
             .cellAutoHeight()
-            .headerView(self.sectionHeaderView, ^() {
-                self.sectionHeaderView.backgroundColor = [UIColor redColor];
-            });
-            [section configCell:^(TestViewCell * cell, NSDictionary * data, NSIndexPath * indexPath) {
+            .footerTitle(@"footer title");
+            [section headerView:self.sectionHeaderView setting:^(UIView *headerView, NSUInteger section) {
+                SNLog(@"--- - - -- -  -%lu",(unsigned long)section);
+            }];
+            [section configCell:^(TestViewCell * cell, NSDictionary * data, NSIndexPath * indexPath, UITableView * tableView) {
                 [cell.avatarView setImage:[UIImage imageNamed:data[@"avatar"]]];
                 [cell.nameView setText:data[@"user"]];
                 [cell.dateView setText:data[@"date"]];
                 [cell.detailView setText:data[@"content"]];
                 [cell.imgView setImage:[UIImage imageNamed:data[@"image"]]];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
             }];
-            [section selected:^(NSUInteger row, id data) {
+            [section selected:^(NSUInteger row, id data, UITableView * tableView) {
                 SNLog(@"非nib创建的cell");
             }];
-            
         }];
-        
     }];
+    
+//    [self.view addSubview:testView];
 }
 
 - (void)test {
@@ -171,15 +191,18 @@
 }
 
 - (UIView *)sectionHeaderView {
-    _sectionHeaderView = [[UIView alloc] init];
-    _sectionHeaderView.frame = CGRectMake(0, 0, PHONE_WIDTH, 10);
-    _sectionHeaderView.backgroundColor = [UIColor blueColor];
+    if (!_sectionHeaderView) {
+        _sectionHeaderView = [[UIView alloc] init];
+        _sectionHeaderView.frame = CGRectMake(0, 0, PHONE_WIDTH, 30);
+        _sectionHeaderView.backgroundColor = [UIColor clearColor];
+    }
+    
     return _sectionHeaderView;
 }
 - (UIView *)sectionFooterView {
     _sectionFooterView = [[UIView alloc] init];
     _sectionFooterView.frame = CGRectMake(0, 0, PHONE_WIDTH, 10);
-    _sectionFooterView.backgroundColor = [UIColor blueColor];
+    _sectionFooterView.backgroundColor = [UIColor yellowColor];
     return _sectionFooterView;
 }
 

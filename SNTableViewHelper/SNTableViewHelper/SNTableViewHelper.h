@@ -24,6 +24,9 @@
 //辅助一个section
 - (void)helpSection:(void(^)(SNTableViewSectionHelper * section))sectionBlock;
 
+//辅助复杂的section，以应对杂乱的数据结构
+- (void)helpSpecialSection:(void(^)(SNTableViewSectionHelper * section))sectionBlock;
+
 //辅助多个section
 - (void)helpSomeSection:(void(^)(SNTableViewSectionHelper * section))sectionBlock;
 

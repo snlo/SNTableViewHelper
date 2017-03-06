@@ -6,11 +6,23 @@
 //  Copyright © 2017年 snlo. All rights reserved.
 //
 
+#import <objc/runtime.h>
 #import "UITableViewCell+SNTableViewHelper.h"
 
 #import "SNTableViewHelperManager.h"
 
 @implementation UITableViewCell (SNTableViewHelper)
+
+
+- (BOOL)is_snt_separator {
+    NSNumber * number = objc_getAssociatedObject(self, _cmd);
+    return number;
+}
+- (void)setIs_snt_separator:(BOOL)is_snt_separator {
+    NSNumber * number = [NSNumber numberWithBool:is_snt_separator];
+    objc_setAssociatedObject(self, @selector(is_snt_separator), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 
 + (instancetype)nibCellWithTabelView:(UITableView *)tabelView
 {
@@ -36,5 +48,7 @@
     
     return cell;
 }
+
+
 
 @end
