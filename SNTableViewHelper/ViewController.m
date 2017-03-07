@@ -50,6 +50,10 @@
     
     cell.title_sn.text = @"asdafd";
     
+    if (indexPath.row == 0) {
+        [cell.snt_separatorView removeFromSuperview];
+    }
+    
     return cell;
 }
 

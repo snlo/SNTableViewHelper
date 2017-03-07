@@ -21,6 +21,14 @@
     objc_setAssociatedObject(self,@selector(sections),sections,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (NSMutableDictionary * )delegates {
+    return objc_getAssociatedObject(self,_cmd);
+}
+
+- (void)setDelegates:(NSMutableDictionary *)delegates {
+    objc_setAssociatedObject(self,@selector(delegates),delegates,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 #pragma mark -- UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -121,9 +129,21 @@
     if (indexPath.row == 0) {
         [cell.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (obj.frame.size.height < 1 ) {
-                SNLog(@"cell - - - color - %@ ",obj.tintColor);
+                
             }
         }];
+    }
+}
+
+#pragma mark -- UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.didscrollBlock) {
+        self.didscrollBlock(scrollView);
+    }
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (self.didEndDraggingBlock) {
+        self.didEndDraggingBlock(scrollView, decelerate);
     }
 }
 

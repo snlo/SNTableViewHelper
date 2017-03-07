@@ -10,6 +10,11 @@
 
 @implementation TestViewCell
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+}
+
 - (UIView *)userView {
     if(!_userView) {
         _userView = [UIView new];
@@ -112,6 +117,16 @@
         border.layer.borderWidth = 0.5;
     }
     return _imgView;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
+        self.is_snt_separator = YES;
+        self.snt_separatorX = 20;
+        self.snt_separatorWidth = PHONE_WIDTH / 2;
+        
+    } return self;
 }
 
 @end

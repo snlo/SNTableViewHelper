@@ -11,6 +11,7 @@
 #import "ViewCell.h"
 
 #import "TestViewCell.h"
+#import "Masonry.h"
 
 @interface TestViewController ()
 
@@ -52,7 +53,7 @@
                    @{@"text":@"nnnn"},
                    
                    @[
-                       @{@"text":@"Following",@"value":@"45"},
+                       @{@"text":@"FollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowing",@"value":@"45"},
                        @{@"text":@"Follower",@"value":@"10"},
                        @{@"text":@"Star",@"value":@"234"},
                        @{@"text":@"Setting",@"accessoryType":@(UITableViewCellAccessoryDisclosureIndicator)},
@@ -72,7 +73,8 @@
                                                 style:UITableViewStyleGrouped
                                             superView:self.view];
 //    self.tableView.backgroundColor = [UIColor clearColor];
-    
+
+
     [self.tableView sn_helpTableView:^(SNTableViewHelper *helper) {
         
         self.tableView.tableHeaderView = self.tableHeaderView;
@@ -91,7 +93,6 @@
                 if (section == 1) {
                     headerView.backgroundColor = [UIColor redColor];
                 }
-                SNLog(@"- - - - - - - - -%lu",(unsigned long)section);
             }];
             [section configCell:^(ViewCell * cell, id data, NSIndexPath * indexPath, UITableView * tableView) {
 //                cell.title_sn.text = data[@"text"];
@@ -102,6 +103,7 @@
                     string = data;
                 }
                 cell.title_sn.text = string;
+                
                 cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
             }]; @weakify(self);
             [section selected:^(NSUInteger row, id data, UITableView * tableView) { @strongify(self);
@@ -117,14 +119,14 @@
             .dataSection(@[@"11111",@"222222"])
             .cellHeight(44);
             [section headerView:self.sectionHeaderView setting:^(UIView *headerView, NSUInteger section) {
-               SNLog(@"--- - - -- -  -%lu",(unsigned long)section);
+               
             }];
             [section configCell:^(ViewCell * cell, NSString * data, NSIndexPath * indexPath, UITableView * tableView) {
                cell.title_sn.text = data;
                 cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 10);
             }]; @weakify(self);
             [section selected:^(NSUInteger row, id data, UITableView * tableView) { @strongify(self);
-                SNLog(@"selected --- %@",data);
+                
                 switch (row) {
                     case 0: {
                         SNLog(@"first");
@@ -141,13 +143,14 @@
         }];
         
         [helper helpSection:^(SNTableViewSectionHelper *section) {
+
             section
             .cell([TestViewCell class])
             .dataSection(self.feed)
             .cellAutoHeight()
             .footerTitle(@"footer title");
             [section headerView:self.sectionHeaderView setting:^(UIView *headerView, NSUInteger section) {
-                SNLog(@"--- - - -- -  -%lu",(unsigned long)section);
+                
             }];
             [section configCell:^(TestViewCell * cell, NSDictionary * data, NSIndexPath * indexPath, UITableView * tableView) {
                 [cell.avatarView setImage:[UIImage imageNamed:data[@"avatar"]]];
@@ -155,20 +158,27 @@
                 [cell.dateView setText:data[@"date"]];
                 [cell.detailView setText:data[@"content"]];
                 [cell.imgView setImage:[UIImage imageNamed:data[@"image"]]];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+                SNLog(@"%ld",(long)indexPath.row);
             }];
             [section selected:^(NSUInteger row, id data, UITableView * tableView) {
                 SNLog(@"非nib创建的cell");
             }];
         }];
+        
     }];
+    [self.tableView didScroll:^(UIScrollView *scrollView) {
+        
+    }];
+    
+    
     
 //    [self.view addSubview:testView];
 }
 
+
 - (void)test {
     SNLog(@"xxxxxxx");
+    
 }
 
 - (void)dealloc {

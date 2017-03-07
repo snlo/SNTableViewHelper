@@ -33,5 +33,8 @@
  */
 - (void)sn_helpTableView:(void(^)(SNTableViewHelper * helper))helper;
 
+- (void)didScroll:(void(^)(UIScrollView * scrollView))didScrollBlock;
+
+- (void)didEndDragging:(void(^)(UIScrollView * scrollerView, BOOL decelerate))didEndDraggingBlock;
 
 @end

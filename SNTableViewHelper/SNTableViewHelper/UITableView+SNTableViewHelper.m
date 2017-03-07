@@ -52,8 +52,23 @@
     
     self.dataSource = dataSource;
     self.delegate = delegate;
-    
+
     delegate.sections = dataSource.sections = viewHelper.sections;
 }
 
+- (void)didScroll:(void(^)(UIScrollView * scrollView))didScrollBlock {
+    if (didScrollBlock) {
+        self.snDelegate.didscrollBlock = didScrollBlock;
+    }
+}
+- (void)didEndDragging:(void(^)(UIScrollView * scrollerView, BOOL decelerate))didEndDraggingBlock {
+    if (didEndDraggingBlock) {
+        self.snDelegate.didEndDraggingBlock = didEndDraggingBlock;
+    }
+}
+
+
+
 @end
+
+

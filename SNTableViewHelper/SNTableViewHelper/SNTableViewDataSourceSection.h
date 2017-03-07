@@ -39,6 +39,4 @@ __attribute__((objc_subclassing_restricted)) //标记不能被继承
 @property (nonatomic, copy) HeaderviewBlock headerViewBlock;
 @property (nonatomic, copy) FooterViewBlock footerViewBlock;
 
-
-
 @end

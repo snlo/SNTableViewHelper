@@ -31,7 +31,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    id cell;
+    UITableViewCell * cell = [UITableViewCell new];
     if (self.sections[indexPath.section].isNibCell) {
         cell = [self.sections[indexPath.section].cell nibCellWithTabelView:tableView];
     } else {
@@ -44,6 +44,14 @@
     
     if (configCellBlock) {
         configCellBlock(cell, data, indexPath, tableView);
+    }
+    
+    if (cell.is_snt_separator) {
+        if (indexPath.row == 0) {
+            cell.snt_separatorView.backgroundColor = [UIColor blueColor];
+//            [cell.snt_separatorView removeFromSuperview];
+//            cell.snt_separatorView = nil;
+        }
     }
     
     return cell;

@@ -36,15 +36,27 @@ typedef UIView *(^SNHeaderFooterView)();
 //处理事件的回调
 - (void)selected:(SelectBlock)selectBlock;
 
+/**
+ hheaderView、footerView的系统默认标题，高度为40
+ */
 - (SNTableViewSectionHelper * (^)(NSString *))headerTitle;
 - (SNTableViewSectionHelper * (^)(NSString *))footerTitle;
 
+/**
+ 自定义headerView的设置
+ */
 - (SNTableViewSectionHelper * (^)(UIView * (^)()))headerView;
 - (void)headerView:(UIView *)headerView setting:(HeaderviewBlock)headerViewBlock;
 
+/**
+ 自定义footerView的设置
+ */
 - (SNTableViewSectionHelper * (^)(UIView * (^)()))footerView;
 - (void)footerView:(UIView *)footerView setting:(FooterViewBlock)footerViewBlock;
 
+/**
+ header、footer的间隔
+ */
 - (SNTableViewSectionHelper * (^)(CGFloat headerHeight))headerHeight;
 - (SNTableViewSectionHelper * (^)(CGFloat footerHeight))footerHeight;
 

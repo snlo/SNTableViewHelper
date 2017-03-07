@@ -21,6 +21,9 @@
  */
 + (instancetype)cellWithTabelView:(UITableView *)tabelView;
 
+@property (nonatomic, strong) UIView * snt_separatorView;
 @property (nonatomic, assign) BOOL is_snt_separator;
+@property (nonatomic, assign) CGFloat snt_separatorX;
+@property (nonatomic, assign) CGFloat snt_separatorWidth;
 
 @end
