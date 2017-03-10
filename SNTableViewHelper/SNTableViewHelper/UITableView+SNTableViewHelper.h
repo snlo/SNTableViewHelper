@@ -33,8 +33,15 @@
  */
 - (void)sn_helpTableView:(void(^)(SNTableViewHelper * helper))helper;
 
+
+/**
+ ‘scrollViewDidScroll:’的block形式
+ */
 - (void)didScroll:(void(^)(UIScrollView * scrollView))didScrollBlock;
 
+/**
+ ‘scrollViewDidEndDragging:willDecelerate:’的block形式
+ */
 - (void)didEndDragging:(void(^)(UIScrollView * scrollerView, BOOL decelerate))didEndDraggingBlock;
 
 @end

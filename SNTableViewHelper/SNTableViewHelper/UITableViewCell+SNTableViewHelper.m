@@ -21,17 +21,16 @@
     NSNumber * number = [NSNumber numberWithBool:is_snt_separator];
     objc_setAssociatedObject(self, @selector(is_snt_separator), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     if (is_snt_separator) {
-        self.snt_separatorView = [[UIView alloc]init];
+        self.snt_separatorView = [[UIImageView alloc] initWithImage:[UIImage snt_imageWithColor:[UIColor colorWithRed:0.783922 green:0.780392 blue:0.8 alpha:1]]];
         self.snt_separatorView.frame = CGRectMake(15, 0, PHONE_WIDTH-15, 0.5);
-        self.snt_separatorView.backgroundColor = [UIColor redColor];
         [self addSubview:self.snt_separatorView];
     }
 }
 
-- (UIView *)snt_separatorView {
+- (UIImageView *)snt_separatorView {
     return objc_getAssociatedObject(self, _cmd);
 }
-- (void)setSnt_separatorView:(UIView *)snt_separatorView {
+- (void)setSnt_separatorView:(UIImageView *)snt_separatorView {
     objc_setAssociatedObject(self, @selector(snt_separatorView), snt_separatorView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -106,5 +105,20 @@
 
 
 
+@end
+
+
+@implementation UIImage (SNTableViewHelper)
+
++ (UIImage *)snt_imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext(); return image;
+}
 
 @end
+

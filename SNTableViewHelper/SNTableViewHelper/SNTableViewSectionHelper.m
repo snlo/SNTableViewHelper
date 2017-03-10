@@ -84,7 +84,7 @@
     };
 }
 - (void)headerView:(UIView *)headerView setting:(HeaderviewBlock)headerViewBlock {
-    self.sectionData.headerView = [UIView snt_duplicate:headerView];
+    self.sectionData.headerView = [UIView snt_copyView:headerView];
     if (headerViewBlock) {
         self.sectionData.headerViewBlock = headerViewBlock;
     }
@@ -97,7 +97,7 @@
     };
 }
 - (void)footerView:(UIView *)footerView setting:(FooterViewBlock)footerViewBlock {
-    self.sectionData.footerView = [UIView snt_duplicate:footerView];
+    self.sectionData.footerView = [UIView snt_copyView:footerView];
     if (footerViewBlock) {
         self.sectionData.footerViewBlock = footerViewBlock;
     }
@@ -139,7 +139,7 @@
 
 @implementation UIView (SNTableViewHelper)
 
-+ (UIView *)snt_duplicate:(UIView *)view {
++ (UIView *)snt_copyView:(UIView *)view {
     NSData * tempArchive = [NSKeyedArchiver archivedDataWithRootObject:view];
     return [NSKeyedUnarchiver unarchiveObjectWithData:tempArchive];
 }

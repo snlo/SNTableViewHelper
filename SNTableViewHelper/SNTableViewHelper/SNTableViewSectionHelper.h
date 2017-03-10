@@ -67,6 +67,6 @@ typedef UIView *(^SNHeaderFooterView)();
 /**
  复制一份view
  */
-+ (UIView *)snt_duplicate:(UIView *)view;
++ (UIView *)snt_copyView:(UIView *)view;
 
 @end

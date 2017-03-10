@@ -42,28 +42,30 @@
 
 - (void)sn_helpTableView:(void(^)(SNTableViewHelper * helper))helper {
     SNTableViewHelper * viewHelper = [SNTableViewHelper helperWithTableView:self];
-    helper(viewHelper);
+    
     
     SNTableViewDataSource * dataSource = [[SNTableViewDataSource alloc] init];
-    SNTableViewDelegate * delegate = [[SNTableViewDelegate alloc] init];
+//    SNTableViewDelegate * delegate = [[SNTableViewDelegate alloc] init];
     
     self.snDataSource = dataSource;
-    self.snDelegate = delegate;
+//    self.snDelegate = dataSource;
     
     self.dataSource = dataSource;
-    self.delegate = delegate;
+    self.delegate = dataSource;
 
-    delegate.sections = dataSource.sections = viewHelper.sections;
+    dataSource.sections = viewHelper.sections;
+    
+    helper(viewHelper);
 }
 
 - (void)didScroll:(void(^)(UIScrollView * scrollView))didScrollBlock {
     if (didScrollBlock) {
-        self.snDelegate.didscrollBlock = didScrollBlock;
+        self.snDataSource.didscrollBlock = didScrollBlock;
     }
 }
 - (void)didEndDragging:(void(^)(UIScrollView * scrollerView, BOOL decelerate))didEndDraggingBlock {
     if (didEndDraggingBlock) {
-        self.snDelegate.didEndDraggingBlock = didEndDraggingBlock;
+        self.snDataSource.didEndDraggingBlock = didEndDraggingBlock;
     }
 }
 

@@ -104,7 +104,6 @@
                 }
                 cell.title_sn.text = string;
                 
-                cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
             }]; @weakify(self);
             [section selected:^(NSUInteger row, id data, UITableView * tableView) { @strongify(self);
                 
@@ -129,11 +128,11 @@
                 
                 switch (row) {
                     case 0: {
-                        SNLog(@"first");
+                        
                         [self.navigationController popToRootViewControllerAnimated:YES];
                     } break;
                     case 1: {
-                        SNLog(@"second");
+
                         [self.navigationController pushViewController:[TestViewController new] animated:YES];
                     } break;
                     default:
@@ -153,15 +152,24 @@
                 
             }];
             [section configCell:^(TestViewCell * cell, NSDictionary * data, NSIndexPath * indexPath, UITableView * tableView) {
-                [cell.avatarView setImage:[UIImage imageNamed:data[@"avatar"]]];
-                [cell.nameView setText:data[@"user"]];
-                [cell.dateView setText:data[@"date"]];
-                [cell.detailView setText:data[@"content"]];
-                [cell.imgView setImage:[UIImage imageNamed:data[@"image"]]];
+//                [cell.avatarView setImage:[UIImage imageNamed:data[@"avatar"]]];
+//                [cell.nameView setText:data[@"user"]];
+//                [cell.dateView setText:data[@"date"]];
+//                [cell.detailView setText:data[@"content"]];
+//                [cell.imgView setImage:[UIImage imageNamed:data[@"image"]]];
+                
                 SNLog(@"%ld",(long)indexPath.row);
+                if (indexPath.row == 0) {
+                    SNLog(@"xxxxxxxxxxxxxxxxxx");
+                    if (cell.snt_separatorView) {
+                        SNLog(@"cell 还在");
+                    }
+                    [cell.snt_separatorView removeFromSuperview];
+                }
+                
             }];
             [section selected:^(NSUInteger row, id data, UITableView * tableView) {
-                SNLog(@"非nib创建的cell");
+                
             }];
         }];
         

@@ -13,7 +13,7 @@
 
 #import "SNTableViewProtocl.h"
 #import "SNTableViewDataSource.h"
-#import "SNTableViewDelegate.h"
+//#import "SNTableViewDelegate.h"
 
 #import "SNTableViewDataSourceSection.h"
 

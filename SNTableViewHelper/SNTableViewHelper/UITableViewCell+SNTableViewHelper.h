@@ -21,9 +21,35 @@
  */
 + (instancetype)cellWithTabelView:(UITableView *)tabelView;
 
-@property (nonatomic, strong) UIView * snt_separatorView;
+
+/**
+ 分割线视图
+ */
+@property (nonatomic, strong) UIImageView * snt_separatorView;
+
+/**
+ 是否展示分割线，默认为否
+ */
 @property (nonatomic, assign) BOOL is_snt_separator;
+
+/**
+ 分割线距离左边缘的距离，默认为‘0’
+ */
 @property (nonatomic, assign) CGFloat snt_separatorX;
+
+/**
+ 分割线的宽度，默认为屏幕宽
+ */
 @property (nonatomic, assign) CGFloat snt_separatorWidth;
+
+@end
+
+@interface UIImage (SNTableViewHelper)
+
+
+/**
+ 通过颜色创建图片
+ */
++ (UIImage *)snt_imageWithColor:(UIColor *)color;
 
 @end
