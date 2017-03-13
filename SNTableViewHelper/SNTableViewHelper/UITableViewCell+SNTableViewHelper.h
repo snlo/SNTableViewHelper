@@ -13,13 +13,13 @@
 /**
  加载Nib创建的cell
  */
-+ (instancetype)nibCellWithTabelView:(UITableView *)tabelView;
++ (instancetype)nibCellWithTabelView:(UITableView *)tabelView indexPath:(NSIndexPath *)indexPath;
 
 
 /**
  加载非Nib创建的cell
  */
-+ (instancetype)cellWithTabelView:(UITableView *)tabelView;
++ (instancetype)cellWithTabelView:(UITableView *)tabelView indexPath:(NSIndexPath *)indexPath;
 
 
 /**
@@ -35,12 +35,17 @@
 /**
  分割线距离左边缘的距离，默认为‘0’
  */
-@property (nonatomic, assign) CGFloat snt_separatorX;
+@property (nonatomic, assign) CGFloat snt_separatorInsetLeft;
 
 /**
  分割线的宽度，默认为屏幕宽
  */
-@property (nonatomic, assign) CGFloat snt_separatorWidth;
+@property (nonatomic, assign) CGFloat snt_separatorInsetRight;
+
+/**
+ 测试分割线的缩进
+ */
+@property (nonatomic, assign) CGPoint snt_separatorInset;
 
 @end
 

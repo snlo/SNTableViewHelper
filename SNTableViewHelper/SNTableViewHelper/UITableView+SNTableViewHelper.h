@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 @class SNTableViewHelper;
 @class SNTableViewSectionHelper;
+
+//cell左滑事件处理
+typedef void(^RowActionHandler)(UITableViewRowAction *action, NSIndexPath *indexPath);
+typedef void(^HandleRowActionHandler)(UITableView * tableView, UITableViewRowAction *action, NSIndexPath *indexPath);
+typedef NSArray <UITableViewRowAction *> * (^ConfigRowActionsBlock)(UITableView *tableView, NSIndexPath * indexPath, RowActionHandler handler);
 
 @interface UITableView (SNTableViewHelper)
 
@@ -43,5 +49,7 @@
  ‘scrollViewDidEndDragging:willDecelerate:’的block形式
  */
 - (void)didEndDragging:(void(^)(UIScrollView * scrollerView, BOOL decelerate))didEndDraggingBlock;
+
+- (void)configRowActions:(ConfigRowActionsBlock)block handler:(HandleRowActionHandler)handler;
 
 @end

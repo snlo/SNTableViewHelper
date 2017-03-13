@@ -67,12 +67,10 @@
     NSArray * jsonObject = [NSJSONSerialization JSONObjectWithData:json options:(NSJSONReadingOptions) kNilOptions error:&error];
     [self.feed addObjectsFromArray:jsonObject];
     
-//    SNLog(@"%@",self.feed);
     
     self.tableView = [UITableView tabeleViewWithFrame:CGRectMake(0, 0, PHONE_WIDTH, PHONE_HEIGHT)
                                                 style:UITableViewStyleGrouped
                                             superView:self.view];
-//    self.tableView.backgroundColor = [UIColor clearColor];
 
 
     [self.tableView sn_helpTableView:^(SNTableViewHelper *helper) {
@@ -80,8 +78,6 @@
         self.tableView.tableHeaderView = self.tableHeaderView;
         self.tableView.tableFooterView = self.tableFooterView;
         
-        
-//        self.tableView.separatorStyle = NO;
         
         [helper helpSpecialSection:^(SNTableViewSectionHelper *section) {
             section
@@ -95,7 +91,7 @@
                 }
             }];
             [section configCell:^(ViewCell * cell, id data, NSIndexPath * indexPath, UITableView * tableView) {
-//                cell.title_sn.text = data[@"text"];
+
                 NSString * string = [[NSString alloc] init];
                 if ([data isKindOfClass:[NSDictionary class]]) {
                     string = data[@"text"];
@@ -103,6 +99,9 @@
                     string = data;
                 }
                 cell.title_sn.text = string;
+                
+                
+                
                 
             }]; @weakify(self);
             [section selected:^(NSUInteger row, id data, UITableView * tableView) { @strongify(self);
@@ -115,14 +114,17 @@
             
             section
             .nibCell([ViewCell class])
-            .dataSection(@[@"11111",@"222222"])
+            .dataSection(@[@"11111",@"222222",@"11111",@"222222",@"11111",@"222222"])
             .cellHeight(44);
             [section headerView:self.sectionHeaderView setting:^(UIView *headerView, NSUInteger section) {
                
             }];
             [section configCell:^(ViewCell * cell, NSString * data, NSIndexPath * indexPath, UITableView * tableView) {
                cell.title_sn.text = data;
-                cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 10);
+                if (indexPath.row == 1) {
+                } else {
+                    cell.title_sn.text = @"xxxxxxxxxxxxx";
+                }
             }]; @weakify(self);
             [section selected:^(NSUInteger row, id data, UITableView * tableView) { @strongify(self);
                 
@@ -152,20 +154,11 @@
                 
             }];
             [section configCell:^(TestViewCell * cell, NSDictionary * data, NSIndexPath * indexPath, UITableView * tableView) {
-//                [cell.avatarView setImage:[UIImage imageNamed:data[@"avatar"]]];
-//                [cell.nameView setText:data[@"user"]];
-//                [cell.dateView setText:data[@"date"]];
-//                [cell.detailView setText:data[@"content"]];
-//                [cell.imgView setImage:[UIImage imageNamed:data[@"image"]]];
-                
-                SNLog(@"%ld",(long)indexPath.row);
-                if (indexPath.row == 0) {
-                    SNLog(@"xxxxxxxxxxxxxxxxxx");
-                    if (cell.snt_separatorView) {
-                        SNLog(@"cell 还在");
-                    }
-                    [cell.snt_separatorView removeFromSuperview];
-                }
+                [cell.avatarView setImage:[UIImage imageNamed:data[@"avatar"]]];
+                [cell.nameView setText:data[@"user"]];
+                [cell.dateView setText:data[@"date"]];
+                [cell.detailView setText:data[@"content"]];
+                [cell.imgView setImage:[UIImage imageNamed:data[@"image"]]];
                 
             }];
             [section selected:^(NSUInteger row, id data, UITableView * tableView) {
@@ -174,13 +167,40 @@
         }];
         
     }];
-    [self.tableView didScroll:^(UIScrollView *scrollView) {
+    @weakify(self);
+    [self.tableView didScroll:^(UIScrollView *scrollView) { @strongify(self);
+        
+        [self test];
         
     }];
     
+    [self.tableView didEndDragging:^(UIScrollView *scrollerView, BOOL decelerate) { 
+        
+        [self test];
+        
+    }];
     
+
+    [self.tableView configRowActions:^NSArray<UITableViewRowAction *> *(UITableView *tableView, NSIndexPath *indexPath, RowActionHandler handler) {
+        
+        //test
+        
+        UIButton *buttonForImage = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[buttonForImage imageForState:UIControlStateNormal] handler:handler];
+        
+        UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"disenable" handler:handler];
+        action2.enabled = false;
+        
+        UITableViewRowAction *action3 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"emjoy👍" handler:handler];
+        
+        return @[action1,action2,action3];
+        
+    } handler:^(UITableView * tableView, UITableViewRowAction *action, NSIndexPath *indexPath) {
+        
+        SNLog(@"%@",action.title);
+        
+    }];
     
-//    [self.view addSubview:testView];
 }
 
 

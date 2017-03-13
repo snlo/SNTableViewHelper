@@ -22,14 +22,6 @@
     objc_setAssociatedObject(self,@selector(snDataSource),snDataSource,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (SNTableViewDelegate *)snDelegate {
-    return objc_getAssociatedObject(self,_cmd);
-}
-
-- (void)setSnDelegate:(SNTableViewDelegate *)snDelegate {
-    objc_setAssociatedObject(self,@selector(snDelegate),snDelegate,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 
 + (instancetype)tabeleViewWithFrame:(CGRect)frame style:(UITableViewStyle)style superView:(UIView *)superView {
     
@@ -43,12 +35,9 @@
 - (void)sn_helpTableView:(void(^)(SNTableViewHelper * helper))helper {
     SNTableViewHelper * viewHelper = [SNTableViewHelper helperWithTableView:self];
     
-    
     SNTableViewDataSource * dataSource = [[SNTableViewDataSource alloc] init];
-//    SNTableViewDelegate * delegate = [[SNTableViewDelegate alloc] init];
     
     self.snDataSource = dataSource;
-//    self.snDelegate = dataSource;
     
     self.dataSource = dataSource;
     self.delegate = dataSource;
@@ -69,7 +58,14 @@
     }
 }
 
-
+- (void)configRowActions:(ConfigRowActionsBlock)block handler:(HandleRowActionHandler)handler {
+    if (block) {
+        self.snDataSource.configRowActionsBlock = block;
+    }
+    if (handler) {
+        self.snDataSource.handleRowActionHandler = handler;
+    }
+}
 
 @end
 

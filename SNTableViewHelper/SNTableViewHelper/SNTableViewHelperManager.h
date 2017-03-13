@@ -10,22 +10,20 @@
 
 #import "UITableViewCell+SNTableViewHelper.h"
 #import "UITableView+SNTableViewHelper.h"
+#import "UITableViewRowAction+JZExtension.h"
 
-#import "SNTableViewProtocl.h"
 #import "SNTableViewDataSource.h"
-//#import "SNTableViewDelegate.h"
 
 #import "SNTableViewDataSourceSection.h"
 
 #import "SNTableViewSectionHelper.h"
-#import "SNTableViewCellHelper.h"
 #import "SNTableViewHelper.h"
 
 #import "EXTScope.h"
 #import "Masonry.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-#if TARGET_IPHONE_SIMULATOR
+#if !TARGET_IPHONE_SIMULATOR
 #define SNLog( s, ... ) NSLog( @"[%@:%d] %@", [[NSString stringWithUTF8String:__FILE__] \
 lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 #else

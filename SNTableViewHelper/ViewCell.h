@@ -11,5 +11,6 @@
 @interface ViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *title_sn;
+//@property (weak, nonatomic) IBOutlet UIView *viewSepar;
 
 @end

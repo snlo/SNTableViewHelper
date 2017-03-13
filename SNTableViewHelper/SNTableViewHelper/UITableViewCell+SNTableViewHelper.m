@@ -20,11 +20,6 @@
 - (void)setIs_snt_separator:(BOOL)is_snt_separator {
     NSNumber * number = [NSNumber numberWithBool:is_snt_separator];
     objc_setAssociatedObject(self, @selector(is_snt_separator), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (is_snt_separator) {
-        self.snt_separatorView = [[UIImageView alloc] initWithImage:[UIImage snt_imageWithColor:[UIColor colorWithRed:0.783922 green:0.780392 blue:0.8 alpha:1]]];
-        self.snt_separatorView.frame = CGRectMake(15, 0, PHONE_WIDTH-15, 0.5);
-        [self addSubview:self.snt_separatorView];
-    }
 }
 
 - (UIImageView *)snt_separatorView {
@@ -34,33 +29,38 @@
     objc_setAssociatedObject(self, @selector(snt_separatorView), snt_separatorView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (CGFloat)snt_separatorX {
+- (CGFloat)snt_separatorInsetLeft {
     NSNumber * number = objc_getAssociatedObject(self, _cmd);
     return [number floatValue];
 }
-- (void)setSnt_separatorX:(CGFloat)snt_separatorX {
-    NSNumber * number = [NSNumber numberWithFloat:snt_separatorX];
-    objc_setAssociatedObject(self, @selector(snt_separatorX), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (snt_separatorX) {
-        self.snt_separatorView.frame = CGRectMake(snt_separatorX, 0, CGRectGetWidth(self.snt_separatorView.frame), 0.5);
-    }
+- (void)setSnt_separatorInsetLeft:(CGFloat)snt_separatorInsetLeft {
+    NSNumber * number = [NSNumber numberWithFloat:snt_separatorInsetLeft];
+    objc_setAssociatedObject(self, @selector(snt_separatorInsetLeft), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (CGFloat)snt_separatorWidth {
+- (CGFloat)snt_separatorInsetRight {
     NSNumber * number = objc_getAssociatedObject(self, _cmd);
     return [number floatValue];
 }
-- (void)setSnt_separatorWidth:(CGFloat)snt_separatorWidth {
-    NSNumber * number = [NSNumber numberWithFloat:snt_separatorWidth];
-    objc_setAssociatedObject(self, @selector(snt_separatorWidth), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (snt_separatorWidth) {
-        self.snt_separatorView.frame = CGRectMake(self.snt_separatorView.frame.origin.x, 0, snt_separatorWidth, 0.5);
-    }
+- (void)setSnt_separatorInsetRight:(CGFloat)snt_separatorInsetRight {
+    NSNumber * number = [NSNumber numberWithFloat:snt_separatorInsetRight];
+    objc_setAssociatedObject(self, @selector(snt_separatorInsetRight), number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CGPoint)snt_separatorInset {
+    NSValue * value = objc_getAssociatedObject(self, _cmd);
+    return [value CGPointValue];
+}
+- (void)setSnt_separatorInset:(CGPoint)snt_separatorInset {
+    NSValue * value = [NSNumber valueWithCGPoint:snt_separatorInset];
+    
+    objc_setAssociatedObject(self, @selector(snt_separatorInset), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    self.snt_separatorView.frame = CGRectMake(self.snt_separatorInset.x, 0, PHONE_WIDTH-self.snt_separatorInset.x - self.snt_separatorInset.y, 0.5);
 }
 
 
 
-+ (instancetype)nibCellWithTabelView:(UITableView *)tabelView
++ (instancetype)nibCellWithTabelView:(UITableView *)tabelView indexPath:(NSIndexPath *)indexPath
 {
     NSString * identifier = NSStringFromClass([self class]);
     
@@ -70,16 +70,21 @@
     
     if (cell.is_snt_separator) {
         tabelView.separatorStyle = NO;
+        if (!cell.snt_separatorView) {
+            cell.snt_separatorView = [[UIImageView alloc] initWithImage:[UIImage snt_imageWithColor:[UIColor colorWithRed:0.783922 green:0.780392 blue:0.8 alpha:1]]];
+            cell.snt_separatorView.frame = CGRectMake(cell.snt_separatorInsetLeft, 0, PHONE_WIDTH-cell.snt_separatorInsetLeft-cell.snt_separatorInsetRight, 0.5);
+            [cell addSubview:cell.snt_separatorView];
+        }
     }
     
-//    if (!cell) {
+    //    if (!cell) {
 //        cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:nil options:nil] firstObject];
 //    }
     
     return cell;
 }
 
-+ (instancetype)cellWithTabelView:(UITableView *)tabelView {
++ (instancetype)cellWithTabelView:(UITableView *)tabelView indexPath:(NSIndexPath *)indexPath {
     
     NSString * identifier = NSStringFromClass([self class]);
     
@@ -89,6 +94,11 @@
     
     if (cell.is_snt_separator) {
         tabelView.separatorStyle = NO;
+        if (!cell.snt_separatorView) {
+            cell.snt_separatorView = [[UIImageView alloc] initWithImage:[UIImage snt_imageWithColor:[UIColor colorWithRed:0.783922 green:0.780392 blue:0.8 alpha:1]]];
+            cell.snt_separatorView.frame = CGRectMake(cell.snt_separatorInsetLeft, 0, PHONE_WIDTH-cell.snt_separatorInsetLeft-cell.snt_separatorInsetRight, 0.5);
+            [cell addSubview:cell.snt_separatorView];
+        }
     }
     
 //    if (!cell) {

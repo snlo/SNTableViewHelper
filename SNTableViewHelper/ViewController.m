@@ -46,7 +46,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ViewCell * cell = [ViewCell nibCellWithTabelView:tableView];
+    ViewCell * cell = [ViewCell nibCellWithTabelView:tableView indexPath:indexPath];
     
     cell.title_sn.text = @"asdafd";
     

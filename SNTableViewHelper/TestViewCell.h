@@ -16,5 +16,5 @@
 @property(nonatomic, retain) UILabel * dateView;
 @property(nonatomic, retain) UILabel * detailView;
 @property(nonatomic, retain) UIImageView * imgView;
-- (void)testView:(UIView*(^)())block;
+
 @end

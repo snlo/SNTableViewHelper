@@ -13,15 +13,20 @@
 typedef void(^ConfigCellBlock)(id cell, id data, NSIndexPath * indexPath, UITableView * tableView);
 //Select事件块
 typedef void(^SelectBlock)(NSUInteger row, id data, UITableView * tableView);
-
+//配置section的头尾视图
 typedef void(^HeaderviewBlock)(UIView * headerView, NSUInteger section);
 typedef void(^FooterViewBlock)(UIView * footerView, NSUInteger section);
-
+//滑动处理
 typedef void(^DidScroll)(UIScrollView * scrollView);
-
 typedef void(^DidEndDragging)(UIScrollView * scrollView, BOOL decelerate);
 
+//typedef void(^RowActionHandler)(UITableView * tableView, UITableViewRowAction *action, NSIndexPath *indexPath);
+//typedef NSArray <UITableViewRowAction *> * (^ConfigRowActionsBlock)(UITableView *tableView, NSIndexPath * indexPath, RowActionHandler handler);
+
+
 @class SNTableViewDataSourceSection;
+
+
 
 @interface SNTableViewDataSource : NSObject <UITableViewDataSource, UITableViewDelegate>
 
@@ -30,5 +35,8 @@ typedef void(^DidEndDragging)(UIScrollView * scrollView, BOOL decelerate);
 
 @property (nonatomic, copy) DidScroll didscrollBlock;
 @property (nonatomic, copy) DidEndDragging didEndDraggingBlock;
+
+@property (nonatomic, copy) ConfigRowActionsBlock configRowActionsBlock;
+@property (nonatomic, copy) HandleRowActionHandler handleRowActionHandler;
 
 @end

@@ -42,35 +42,31 @@
     
     UITableViewCell * cell = [UITableViewCell new];
     if (self.sections[indexPath.section].isNibCell) {
-        cell = [self.sections[indexPath.section].cell nibCellWithTabelView:tableView];
+        cell = [self.sections[indexPath.section].cell nibCellWithTabelView:tableView indexPath:indexPath];
     } else {
-        cell = [self.sections[indexPath.section].cell cellWithTabelView:tableView];
+        cell = [self.sections[indexPath.section].cell cellWithTabelView:tableView indexPath:indexPath];
     }
     
     ConfigCellBlock configCellBlock = self.sections[indexPath.section].configCell;
     
     id data = self.sections[indexPath.section].dataSection[indexPath.row];
     
-    if (!self.sections[indexPath.section].isAutoCellHeight) {
-        if (indexPath.row == 0) {
-            if (cell.is_snt_separator) {
-                if (cell.snt_separatorView) {
-                    [cell.snt_separatorView removeFromSuperview];
-                    cell.snt_separatorView = nil;
-                }
-                
-                //                        cell.snt_separatorView.hidden = YES;
-//                SNLog(@"-------------------------------------");
-            }
-        }
-    }
-    
     if (configCellBlock) {
         configCellBlock(cell, data, indexPath, tableView);
     }
     
     
+    
+    
     return cell;
+}
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        if (cell.is_snt_separator) {
+            [cell.snt_separatorView removeFromSuperview];
+            cell.snt_separatorView = nil;
+        }
+    }
 }
 
 #pragma optional
@@ -179,6 +175,33 @@
 }
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath NS_AVAILABLE_IOS(6_0) {
     
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.configRowActionsBlock) {
+        [tableView setEditing:false animated:true];
+    }
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.configRowActionsBlock) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+- (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    void(^rowActionHandler)(UITableViewRowAction *, NSIndexPath *) = ^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        if (self.handleRowActionHandler) {
+            self.handleRowActionHandler(tableView, action, indexPath);
+        }
+        [tableView setEditing:false animated:true];
+    };
+    
+    if (self.configRowActionsBlock) {
+        return self.configRowActionsBlock(tableView, indexPath, rowActionHandler);
+    } else {
+        return @[];
+    }
 }
 
 #pragma mark -- UIScrollViewDelegate

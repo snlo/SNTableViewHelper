@@ -16,8 +16,9 @@
     self.title_sn.numberOfLines = 0;
     
     self.is_snt_separator = YES;
-    self.snt_separatorX = 20;
-    self.snt_separatorWidth = PHONE_WIDTH / 2;
+    self.snt_separatorInsetLeft = 20;
+    self.snt_separatorInsetRight = 50;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
