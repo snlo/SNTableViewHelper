@@ -13,8 +13,13 @@
 #import "TestViewController.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+{
+    NSMutableArray <NSDictionary *> * _dataSource;
+}
 
 @property (nonatomic, strong) UITableView * tableView;
+
+
 
 @end
 
@@ -65,11 +70,29 @@
     
     cell.title_sn.text = @"ok";
     
+    if (!_dataSource) {
+        _dataSource = [[NSMutableArray alloc] initWithArray:@[@"1",@"2"]];
+    }
+    SNLog(@"array -- - - %@",_dataSource);
+    
+    [self testCopyObject:&_dataSource];
+    
+    SNLog(@"copyed array -- - - %@",_dataSource);
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+
 }
 
 
+
+/**
+ 实例变量的地址传递：’NSMutableArray **‘ 是 'NSMutableArray * __autoreleasing*‘的缩写，而ARC需要知道对象应用计数的所有权，所以应该写成'NSMutableArray * __strong*'。
+ */
+- (void)testCopyObject:(NSMutableArray * __strong*)array {
+    
+    [* array addObject:@"3"];
+}
 
 - (void)dealloc {
     SNLog(@"-----------dealloc-----------------");
